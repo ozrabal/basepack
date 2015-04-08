@@ -160,11 +160,20 @@ $loader = new Psr4AutoloaderClass;
      
      // register the autoloader
      $loader->register();
-      
+
+     $loader->addNamespace('Core', '/srv/www/wordpress-default/wp-content/plugins/basepack/core/');
+
+     new \Core\Base();
+     
+     
       // register the base directories for the namespace prefix
       $loader->addNamespace('Modules\Cookie', '/srv/www/wordpress-default/wp-content/plugins/basepack/modules/cookie/');
 
 
 //
-
+   
+      
 new Modules\Cookie\Cookie();
+
+
+

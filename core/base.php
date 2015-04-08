@@ -6,12 +6,12 @@
  * and open the template in the editor.
  */
 
-namespace Modules\Cookie;
+namespace Core;
 
-class Cookie {
+class Base {
     
     public function __construct() {
-        //echo __CLASS__;
+        echo __CLASS__;
     }
     
 }
