@@ -6,12 +6,26 @@
  * and open the template in the editor.
  */
 
-namespace Core;
+namespace Basepack\Core;
 
 class Base {
-    
+    static $instance = false;
+
+
     public function __construct() {
-        echo __CLASS__;
+        echo __METHOD__;
     }
     
+    public static function init() {
+
+	if( ! self::$instance ) {
+	    self::$instance = new Base();
+	}
+	return self::$instance;
+    }
+
+
+    public function load_modules(){
+	
+    }
 }
