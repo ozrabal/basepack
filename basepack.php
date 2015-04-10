@@ -15,28 +15,36 @@ defined( 'ABSPATH' ) or die();
 
 define( 'BASEPACK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
-require 'core/base-autoloader.php';
+require 'core/_inc/functions.php';
+require 'core/autoloader.php';
 
-$loader = new Core\Autoloader();
-$loader->register();
-$loader->addNamespace( 'Basepack\Core', BASEPACK_PLUGIN_DIR . 'core/' );
+//add_action( 'init', array( '\\Basepack\\Core\\Base', 'init' ), 2 );
+
+//$base = \Basepack\Core\Base::init($loader);
+add_action( 'plugins_loaded', function() {
+    $loader = new Basepack\Core\Autoloader();
+    $loader->register();
+    $loader->addNamespace( 'Basepack\Core', BASEPACK_PLUGIN_DIR . 'core/' );
+    $basepack = new Basepack\Core\Base($loader);
 
 
-add_action( 'init', array( '\\Basepack\\Core\\Base', 'init' ), 2 );
-add_action( 'plugins_loaded', array( '\\Basepack\\Core\\Base', 'load_modules' ), 100 );
 
 
-//new \Basepack\Core\Base();
-     
-     
+  });
+
+add_action('basepack_pre_load_modules', 'd');
+function d(){
+    echo __FUNCTION__;
+}
+
       // register the base directories for the namespace prefix
-      $loader->addNamespace('Modules\Cookie', '/srv/www/wordpress-default/wp-content/plugins/basepack/modules/cookie/');
+      //$loader->addNamespace('Modules\Cookie', '/srv/www/wordpress-default/wp-content/plugins/basepack/modules/cookie/');
 
 
 //
    
       
-new Modules\Cookie\Cookie();
+//new Modules\Cookie\Cookie();
 
 
 

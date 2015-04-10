@@ -1,7 +1,7 @@
 <?php
 //https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader-examples.md
 
-namespace Core;
+namespace Basepack\Core;
 
 
 class Autoloader {
@@ -21,6 +21,7 @@ class Autoloader {
     public function register()
     {
         spl_autoload_register(array($this, 'loadClass'));
+	
     }
 
     /**

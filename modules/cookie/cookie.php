@@ -12,6 +12,8 @@ class Cookie {
     
     public function __construct() {
         //echo __CLASS__;
+$this->name = 'cookie';
+	
     }
     
 }
