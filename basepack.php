@@ -17,11 +17,13 @@ define( 'BASEPACK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 require 'core/_inc/functions.php';
 require 'core/autoloader.php';
-
+if( !session_id() ) {
+	    session_start();
+	}
 //add_action( 'init', array( '\\Basepack\\Core\\Base', 'init' ), 2 );
 
 //$base = \Basepack\Core\Base::init($loader);
-add_action( 'plugins_loaded', function() {
+add_action( 'init', function() {
     $loader = new Basepack\Core\Autoloader();
     $loader->register();
     $loader->addNamespace( 'Basepack\Core', BASEPACK_PLUGIN_DIR . 'core/' );
@@ -32,10 +34,10 @@ add_action( 'plugins_loaded', function() {
 
   });
 
-add_action('basepack_pre_load_modules', 'd');
-function d(){
-    echo __FUNCTION__;
-}
+//add_action('basepack_pre_load_modules', 'd');
+//function d(){
+//    echo __FUNCTION__;
+//}
 
       // register the base directories for the namespace prefix
       //$loader->addNamespace('Modules\Cookie', '/srv/www/wordpress-default/wp-content/plugins/basepack/modules/cookie/');

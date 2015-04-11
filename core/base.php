@@ -44,8 +44,13 @@ class Base {
 	}
     }
 
-//moduly rozpoczynajace sie od _ sa nieaktywne
-    private function get_active_modules( $modules ) {
+    //moduly rozpoczynajace sie od _ sa nieaktywne
+    /**
+     * 
+     * @param array $modules
+     * @return boolean|array
+     */
+    private function get_active_modules( Array $modules ) {
 	if( empty( $modules ) ){
 	    return false;
 	}
@@ -59,32 +64,44 @@ class Base {
 	}
     }
 
+    /**
+     * 
+     * @param string $module_name
+     * @return array
+     */
     private function setup_module( $module_name ) {
 	return array(
 	    'name'	=> $module_name,
 	    'namespace'	=> 'Modules\\' . ucfirst( $module_name ),
-	    'path'	=> BASEPACK_PLUGIN_DIR . '/modules/' . $module_name
+	    'path'	=> BASEPACK_PLUGIN_DIR . 'modules/' . $module_name
 	);
     }
     
-    public function load_module( $module ) {
-	
+    /**
+     * 
+     * @param array $module
+     */
+    public function load_module( Array $module ) {
+	 $this->loader->addNamespace( $module['namespace'], $module['path'] );
+            //require_once BASEPACK_PLUGIN_DIR . '/modules/' . $module['name']. '/module_' . $module['name'] . '.php';
+	    //do_action( 'pwp_init_' . $module['name'], array( $this->loader ) );
+         
+         $m = $module['namespace'] . '\\' . ucfirst( $module['name'] );
+	    $this->modules[$module['name']] = new $m( $this->loader );
+            
+            
+            
     }
 
-    public function load_modules(){
-
-	
-	$modules = $this->get_active_modules( $this->get_modules() );
-
-	foreach( $modules as $module_name ){
-	    $module = $this->setup_module($module_name);
-	    $this->loader->addNamespace( $module['namespace'], $module['path'] );
-	    $m = $module['namespace'].'\\'.ucfirst($module['name']);
-	    $this->modules[$module['name']] = new $m();
+    public function load_modules() {
+        $modules = $this->get_active_modules( $this->get_modules() );
+	foreach( $modules as $module_name ) {
+	    $module = $this->setup_module( $module_name );
+            $this->load_module( $module );
+	   
 	//$this->loader->addNamespace('Modules\Cookie', '/srv/www/wordpress-default/wp-content/plugins/basepack/modules/cookie/');
 	//$this->modules['cookie'] = new \Modules\Cookie\Cookie();
-
+//dump($this);
 	}
-	dump($this);
     }
 }
