@@ -1,12 +1,14 @@
 <?php
 /**
-   * Formelement_Image class
+   * Image class
    *
    * @package    PWP
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
-class Formelement_Image extends Formelement {
+namespace Basepack\Core\Form;
+
+class Image extends Formelement {
     private $type = 'image';
 
     /**

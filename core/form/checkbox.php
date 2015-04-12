@@ -1,12 +1,14 @@
 <?php
 /**
-   * Formelement_Checkbox class
+   * Checkbox class
    *
-   * @package    PWP
+   * @package    Basepack
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
+
 namespace Basepack\Core\Form;
+
 class Checkbox extends Formelement {
     protected $type = 'checkbox';
     

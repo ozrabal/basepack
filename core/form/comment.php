@@ -1,12 +1,14 @@
 <?php
 /**
-   * Formelement_Comment class
+   * Comment class
    *
-   * @package    PWP
+   * @package    Basepack
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
-class Formelement_Comment extends Formelement {
+namespace Basepack\Core\Form;
+
+class Comment extends Formelement {
     protected $type = 'comment';
     
     /**

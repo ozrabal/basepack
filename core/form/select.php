@@ -6,7 +6,9 @@
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
-class Formelement_Select extends Formelement {
+namespace Basepack\Core\Form;
+
+class Select extends Formelement {
     protected $type = 'select';
 
     /**

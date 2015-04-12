@@ -2,11 +2,13 @@
 /**
    * Attachment class
    *
-   * @package    PWP
+   * @package    Basepack
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
-class Formelement_Attachment extends Formelement {
+namespace Basepack\Core\Form;
+
+class Attachment extends Formelement {
     protected $type = 'attachment';
 
     /**

@@ -6,7 +6,9 @@
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
-class Formelement_Repeatable extends Formelement {
+namespace Basepack\Core\Form;
+
+class Repeatable extends Formelement {
     
     protected
 	$type = 'repeatable', $request, $body = null;

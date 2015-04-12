@@ -1,12 +1,14 @@
 <?php
 /**
-   * Formelement_Option class
+   * Option class
    *
    * @package    PWP
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
-class Formelement_Option extends Formelement {
+namespace Basepack\Core\Form;
+
+class Option extends Formelement {
     protected $type = 'option', $select;
 
     /**
@@ -15,7 +17,7 @@ class Formelement_Option extends Formelement {
      * @param string $name
      * @param Formelement_Select $select
      */
-    public function __construct( \Form $form, $name, Formelement_Select $select ) {
+    public function __construct( \Form $form, $name, Select $select ) {
         
         parent::__construct( $form, $name );
         $this->select = $select;

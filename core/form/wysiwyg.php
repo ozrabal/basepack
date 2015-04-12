@@ -6,7 +6,9 @@
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
-class Formelement_Wysiwyg extends Formelement {
+namespace Basepack\Core\Form;
+
+class Wysiwyg extends Formelement {
     protected $type = 'wysiwyg';
     private $options = array( 'tinymce' => false );
 

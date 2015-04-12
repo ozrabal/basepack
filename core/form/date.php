@@ -1,12 +1,14 @@
 <?php
 /**
-   * Formelement_Date class
+   * Date class
    *
    * @package    PWP
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
-class Formelement_Date extends Formelement_Input {
+namespace Basepack\Core\Form;
+
+class Date extends Formelement_Input {
     protected $type = 'text';
     
     /**

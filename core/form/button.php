@@ -1,12 +1,14 @@
 <?php
 /**
-   * Formelement_Button class
+   * Button class
    *
-   * @package    PWP
+   * @package    Basepack
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
-class Formelement_Button extends Formelement {
+namespace Basepack\Core\Form;
+
+class Button extends Formelement {
     protected $type = 'button';
 
     /**
