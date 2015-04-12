@@ -128,15 +128,15 @@ $this->name = 'cookie';
 		->set_comment( __( 'If you leave the field blank is used, the message', 'pwp' ) . ':<br><strong>' . $this->get_default( 'message' ) . '</strong>' )
 		->set_class( 'large-text' );
 
-//	$options->add_element( 'text', 'button_label' )
-//		->set_label( __( 'Button label', 'pwp' ) )
-//		->set_comment( __( 'If you leave the field blank is used, the label', 'pwp' ) . ': <strong>' . $this->get_default( 'button_label' ) . '</strong>')
-//		->set_class( 'regular-text' );
-//
-//	$options->add_element( 'checkbox', 'automatic_attach' )
-//		->set_label( __( 'In footer', 'pwp' ) )
-//		->set_comment( __( 'Automatically attach a message to the footer', 'pwp' ) )
-//		->set_value( $this->get_automatic_attach() );
+	$options->add_element( 'text', 'button_label' )
+		->set_label( __( 'Button label', 'pwp' ) )
+		->set_comment( __( 'If you leave the field blank is used, the label', 'pwp' ) . ': <strong>' . $this->get_default( 'button_label' ) . '</strong>')
+		->set_class( 'regular-text' );
+
+	$options->add_element( 'checkbox', 'automatic_attach' )
+		->set_label( __( 'In footer', 'pwp' ) )
+		->set_comment( __( 'Automatically attach a message to the footer', 'pwp' ) )
+		->set_value( $this->get_automatic_attach() );
 
 	$cookie_admin->add_options_group( $options, 'cookie-alert-options' );
         $cookie_admin->add_section( array( 'title' => __( 'Automatic message about the use of cookies', 'pwp' ), 'content' => __( 'The module attaches to the service required by law message about the use of cookies. The message is automatically displayed once for each user session and hidden by clicking the accept button.<br>Options allow you to change the display message and labels the accept button.', 'pwp' ) ), 'cookie-alert-options' );
