@@ -173,6 +173,20 @@ $this->name = 'cookie';
 	}
     }
     
+    /**
+     * funkcja wywolana ajaxem po kliknieciu w button zgody na cookie
+     * ustawia w sesji akceptacje
+     */
+    public function okcookie() {
+        if( !session_id() ) {
+	    //Pwp::load_module( 'session' );
+	}
+	$_SESSION['cookies'] = true;
+	wp_send_json( array( 'cookies' => true ) );
+    }
+    
+    
+    
 //    public static function init(){
 //dump('s');
 //                new Modules\Cookie\Cookie();
