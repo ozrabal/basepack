@@ -140,6 +140,7 @@ class Administrator{
         }
         add_settings_section( str_replace( '_', '-', $option->get_name() ), $section_title, array( $this, 'render_section' ), $tab );
         foreach( $option->elements as $element ) {
+           
             $this->add_settings_field( $element, $option, $tab );
         }
         
@@ -158,7 +159,10 @@ class Administrator{
             $name = $element->label->get_name();
         }
         add_settings_field( $element->get_name(), $name, array( $this, 'render_element' ), $tab, str_replace('_', '-', $option->get_name()),array( 'field' => $element, 'label_for' => $element->get_name() ) );
-    }
+        //add_settings_field( $option->get_name().'['.$element->get_name().']', $name, array( $this, 'render_element' ), $tab, str_replace('_', '-', $option->get_name()),array( 'field' => $element, 'label_for' => $element->get_name() ) );
+
+        
+        }
       
     /**
      * renderuje element formularza
@@ -172,6 +176,8 @@ class Administrator{
             $element['field']->set_message( $_SESSION[$element['field']->get_name()]['message'] );
             unset( $_SESSION[$element['field']->get_name()] );
         }
+        //dump($element['field']->form->get_name());
+        $element['field']->set_name($element['field']->form->get_name().'['.$element['field']->get_name().']');
         echo $element['field']->render();
     }
     /**
