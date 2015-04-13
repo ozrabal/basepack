@@ -41,7 +41,7 @@ class Test {
 	$test_meta = array(
 	    'name'      => 'test_meta',
 	    'title'     => 'Pola dodatkowe',
-	    'post_type' => array( 'slide' ),
+	    'post_type' => array( 'test' ),
 	    'elements'  => array(
 		array(
 		    'type'	=> 'text',
@@ -56,7 +56,7 @@ class Test {
 
 	    )
 	);
-	new Metabox( $test_meta );
+	new \Basepack\Core\Metabox( $test_meta );
 
     }
 
