@@ -399,7 +399,7 @@ abstract class Formelement{
      */
     public function get_label() {
 
-	if( isset( $this->label ) && $this->label instanceof Formelement_Label ) {
+	if( isset( $this->label ) && $this->label instanceof Label ) {
 	    return $this->label->render();
 	}
     }

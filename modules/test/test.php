@@ -45,10 +45,19 @@ class Test {
 	    'elements'  => array(
 		array(
 		    'type'	=> 'text',
-		    'name'	=> 'subtitle',
+		    'name'	=> 'text',
 		    'params'	=> array(
-			'label'	=> 'Tytuł',
-			'comment'   => 'Tytuł slajdu wyświetlany nad jego treścią na stronie głównej',
+			'label'	=> 'Text Label',
+			'comment'   => 'Comment',
+			'class'	=> 'large-text'
+		    ),
+		),
+		array(
+		    'type'	=> 'textarea',
+		    'name'	=> 'textarea',
+		    'params'	=> array(
+			'label'	=> 'Textarea Label',
+			'comment'   => 'Comment',
 			'class'	=> 'large-text'
 		    ),
 		),
