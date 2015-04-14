@@ -13,8 +13,9 @@
  */
 defined( 'ABSPATH' ) or die();
 
+define( 'BASEPACK_VERSION', '1.0.0');
 define( 'BASEPACK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-
+define( 'BASEPACK_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 require 'core/_inc/functions.php';
 require 'core/autoloader.php';
 if( !session_id() ) {
