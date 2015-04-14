@@ -17,7 +17,7 @@ class Option extends Formelement {
      * @param string $name
      * @param Formelement_Select $select
      */
-    public function __construct( \Form $form, $name, Select $select ) {
+    public function __construct( $form, $name, Select $select ) {
         
         parent::__construct( $form, $name );
         $this->select = $select;

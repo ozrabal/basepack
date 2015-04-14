@@ -81,7 +81,7 @@ class Repeatable extends Formelement {
      */
     public function add_element( $type, $name, $iter ) {
 
-        $type = 'Formelement_' . ucfirst( $type );
+        $type = 'Basepack\Core\Form\\' . ucfirst( $type );
         if( class_exists( $type ) ) {
             $this->elements[$iter][$name] = new $type( $this, $name );
             return $this->elements[$iter][$name];
