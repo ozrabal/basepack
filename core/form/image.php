@@ -16,7 +16,7 @@ class Image extends Formelement {
      */
     public function enqueue_scripts() {
 
-	wp_enqueue_script( 'field-image',  plugins_url( '/field-image.js', __FILE__ ), array( 'jquery' ), PWP_VERSION );
+	wp_enqueue_script( 'field-image',  plugins_url( '/field-image.js', __FILE__ ), array( 'jquery' ), BASEPACK_VERSION );
     }
 
     /**
@@ -40,7 +40,7 @@ class Image extends Formelement {
 		}
 	    }
         }
-        return PWP_ROOT_URL . 'images/image.png';
+        return BASEPACK_PLUGIN_URL . '/assets/images/image.png';
     }
     
     /**

@@ -28,7 +28,7 @@ class Repeatable extends Formelement {
     private function enqueue_media_repeatable() {
         
 	wp_enqueue_script( 'jquery-ui-sortable', array( 'jquery' ) );
-        wp_enqueue_script( 'field-repeatable', plugins_url( '/field-repeatable.js', __FILE__ ), array( 'jquery', 'jquery-ui-sortable' ), PWP_VERSION, true );
+        wp_enqueue_script( 'field-repeatable', plugins_url( '/field-repeatable.js', __FILE__ ), array( 'jquery', 'jquery-ui-sortable' ), BASEPACK_VERSION, true );
     }
     
     /**
