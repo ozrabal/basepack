@@ -47,26 +47,96 @@ class Test {
 		    'type'	=> 'text',
 		    'name'	=> 'text',
 		    'params'	=> array(
-			'label'	=> 'Text Label',
+			'label'	    => 'Text Label',
 			'comment'   => 'Comment',
-			'class'	=> 'large-text'
+			'class'	    => 'large-text'
 		    ),
 		),
 		array(
 		    'type'	=> 'textarea',
 		    'name'	=> 'textarea',
 		    'params'	=> array(
-			'label'	=> 'Textarea Label',
+			'label'	    => 'Textarea Label',
 			'comment'   => 'Comment',
-			'class'	=> 'large-text'
+			'class'	    => 'large-text'
 		    ),
 		),
-
-
+		array(
+		    'type'	=> 'wysiwyg',
+		    'name'	=> 'wysiwyg',
+		    'params'	=> array(
+			'label'	    => 'Wysiwyg Label',
+			'comment'   => 'Comment',
+			'class'	    => '',
+			'options'   => array(
+			    'tinymce'	=> true
+			)
+		    ),
+		),
+		array(
+		    'type'	=> 'checkbox',
+		    'name'	=> 'checkbox',
+		    'params'	=> array(
+			'label'	    => 'Checkbox Label',
+			'comment'   => 'Comment',
+			'class'	    => ''
+		    ),
+		),
+		array(
+		    'type'	=> 'image',
+		    'name'	=> 'image',
+		    'params'	=> array(
+			'label'	    => 'Image Label',
+			'comment'   => 'Comment',
+			'class'	    => ''
+		    ),
+		),
+		array(
+		    'type'	=> 'attachment',
+		    'name'	=> 'attachment',
+		    'params'	=> array(
+			'label'	    => 'Attachment Label',
+			'comment'   => 'Comment',
+			'class'	    => ''
+		    ),
+		),
+		array(
+		    'type'	=> 'select',
+		    'name'	=> 'select',
+		    'params'	=> array(
+			'label'	=> 'Select Label',
+			'comment'   => 'Comment',
+			'class'	    => '',
+			'options'   => array(
+			    'key1'  => 'value1',
+			    'key2'  => 'value2'
+			)
+		    ),
+		),
+		array(
+		    'type'	=> 'repeatable',
+		    'name'	=> 'repeatable',
+		    'params'	=> array(
+			'label'	=> 'Repeatable Label',
+			'comment'   => 'Comment',
+			'class'	    => '',
+			'repeater'  => array(
+			    array(
+				'type'	=> 'text',
+				'name'	=> 'repeatable_text',
+				'params'=> array(
+				    'label'	=> 'Repeatable Text Label',
+				    'comment'   => 'Comment',
+				    'class'	=> 'large-text'
+				)
+			    )
+			)
+		    )
+		)
 	    )
 	);
+	
 	new \Basepack\Core\Metabox( $test_meta );
-
     }
 
 }
