@@ -230,7 +230,7 @@ abstract class Formelement{
 	if ( !isset( $this->name ) ) {
 	    return;
 	}
-	if ( $this->form instanceof Options || $this->form instanceof Taxmeta ) {
+	if ( $this->form instanceof Options || $this->form instanceof \Basepack\Core\Taxmeta ) {
 	    if ( $tag ) {
 	        return 'name="' . $this->form->get_name() . '[' . $this->get_name() . ']" ';
 	    } else {
