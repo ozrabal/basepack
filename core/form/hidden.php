@@ -6,6 +6,8 @@
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
-class Formelement_hidden extends Formelement_Input {
+namespace Basepack\Core\Form;
+
+class Hidden extends Input {
     protected $type = 'hidden';
 }
