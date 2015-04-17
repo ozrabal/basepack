@@ -29,11 +29,7 @@ add_action( 'init', function() {
     $loader->register();
     $loader->addNamespace( 'Basepack\Core', BASEPACK_PLUGIN_DIR . 'core/' );
     $basepack = new Basepack\Core\Base($loader);
-
-
-
-
-  });
+});
 
 //add_action('basepack_pre_load_modules', 'd');
 //function d(){

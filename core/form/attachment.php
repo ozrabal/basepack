@@ -16,6 +16,7 @@ class Attachment extends Formelement {
      */
     private function enqueue_scripts() {
 	wp_enqueue_script( 'field-attachment', plugins_url( '/field-attachment.js', __FILE__ ), array( 'jquery' ), BASEPACK_VERSION );
+        wp_enqueue_style( 'field-attachment', BASEPACK_PLUGIN_URL . 'core/form/attachment.css' );
     }
 
     /**
