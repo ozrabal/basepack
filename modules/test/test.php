@@ -88,7 +88,12 @@ class Test {
 		    'params'	=> array(
 			'label'	    => 'Image Label',
 			'comment'   => 'Comment',
-			'class'	    => ''
+			'class'	    => '',
+                        'data'      => array(
+                            'title'     => 'Image title',
+                            'select'    => 'Select image',
+                            'mime'      => 'jpeg'
+                        )
 		    ),
 		),
 		array(
@@ -97,7 +102,12 @@ class Test {
 		    'params'	=> array(
 			'label'	    => 'Attachment Label',
 			'comment'   => 'Comment',
-			'class'	    => ''
+			'class'	    => '',
+                        'data'      => array(
+                            'title'     => 'Image title',
+                            'select'    => 'Select image',
+                            'mime'      => 'jpeg'
+                        )
 		    ),
 		),
 		array(
