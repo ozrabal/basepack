@@ -104,9 +104,9 @@ class Test {
 			'comment'   => 'Comment',
 			'class'	    => '',
                         'data'      => array(
-                            'title'     => 'Image title',
-                            'select'    => 'Select image',
-                            'mime'      => 'jpeg'
+                            'title'     => 'File title',
+                            'select'    => 'Select file',
+                            'mime'      => 'zip'
                         )
 		    ),
 		),
