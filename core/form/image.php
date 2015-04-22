@@ -2,7 +2,7 @@
 /**
    * Image class
    *
-   * @package    PWP
+   * @package    Backpack
    * @subpackage Core
    * @author     Piotr Łepkowski <piotr@webkowski.com>
    */
@@ -15,8 +15,7 @@ class Image extends Formelement {
      * dolacza skrypty js
      */
     public function enqueue_scripts() {
-
-	wp_enqueue_script( 'field-image',  plugins_url( '/field-image.js', __FILE__ ), array( 'jquery' ), BASEPACK_VERSION );
+        wp_enqueue_script( 'field-image',  plugins_url( '/field-image.js', __FILE__ ), array( 'jquery' ), BASEPACK_VERSION );
     }
 
     /**
@@ -30,17 +29,32 @@ class Image extends Formelement {
 	    $current_img = wp_get_attachment_image_src( intval( $id ), 'thumbnail' );
 	    if( $current_img ) {
                 return $current_img[0];
-            } else {
-		if( has_post_thumbnail() ) {
-		    $thumbnail_id = get_post_thumbnail_id( get_the_ID() );
-		    if( $thumbnail_id ) {
-			$thumbnail = wp_get_attachment_image_src( $thumbnail_id , 'thumbnail' );
-			return $thumbnail[0];
-		    }
-		}
-	    }
+            }
+            if( has_post_thumbnail() ) {
+                return $this->get_post_thumbnail_url( get_the_ID() );
+                /*
+		$thumbnail_id = get_post_thumbnail_id( get_the_ID() );
+                if( $thumbnail_id ) {
+                    $thumbnail = wp_get_attachment_image_src( $thumbnail_id , 'thumbnail' );
+                    return $thumbnail[0];
+                }
+                */
+            }
         }
         return BASEPACK_PLUGIN_URL . '/assets/images/image.png';
+    }
+    
+    /**
+     * pobiera url miniaturki
+     * @param int $id
+     * @return string
+     */
+    private function get_post_thumbnail_url( $post_id ){
+        $thumbnail_id = get_post_thumbnail_id( intval( $post_id ) );
+        if( $thumbnail_id ) {
+            $thumbnail = wp_get_attachment_image_src( $thumbnail_id , 'thumbnail' );
+            return $thumbnail[0];
+        }
     }
     
     /**

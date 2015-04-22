@@ -10,17 +10,18 @@ var d;
     b = '.open-media-button';
     d = $(b).next();
     ds.media = media = {
+        data_attributes: data_attributes,
 	buttonId: b,
 	detailsContainerId: d,
 	frame: function(mime) {
 	    this._frame = wp.media( {
-		title: data_attributes.title,
+		title: ds.media.data_attributes.title,
 		button: {
-		    text: data_attributes.select
+		    text: ds.media.data_attributes.select
 		},
 		multiple: false,
 		library: {
-		    type : data_attributes.mime
+		    type : ds.media.data_attributes.mime
 		}
 	    } );
 	    this._frame.on( 'ready', this.ready );
@@ -49,8 +50,9 @@ var d;
 	    }
 	},
 	init: function() {
+            //console.log(ds.media);
 	    $( ds.media.buttonId ).on( 'click', function( e ) {
-		data_attributes=$(this).data();
+		ds.media.data_attributes=$(this).data();
                 var t = $(this).parent().find('div').attr('id');
 		media.detailsContainerId = t;
 		media.frame(mime).open(mime);
