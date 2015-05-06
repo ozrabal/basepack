@@ -70,10 +70,8 @@ class Gallery {
 	    //jesli niezdefiniowany typ wtedy fancybox jako domyslny
 	    if ( !isset( $params['type'] ) || $params['type'] == 'default' ) {
 		$params['type'] = $this->default_gallery;
-		
-
 	    }
-	   // dump($this);
+            $params = apply_filters( 'gallery_params', $params );
 	    $params['type'] = apply_filters('gallery_type', $params['type']);
 	    $this->params = $params;
 	    //include klasy wlasciwej galerii
