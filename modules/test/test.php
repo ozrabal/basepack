@@ -41,7 +41,7 @@ class Test {
 	$test_meta = array(
 	    'name'      => 'test_meta',
 	    'title'     => 'Pola dodatkowe',
-	    'post_type' => array( 'test', 'post' ),
+	    'post_type' => array( 'test' ),
 	    'elements'  => array(
 		array(
 		    'type'	=> 'text',
