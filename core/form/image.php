@@ -11,11 +11,13 @@ namespace Basepack\Core\Form;
 class Image extends Formelement {
     private $type = 'image';
 
+
     /**
      * dolacza skrypty js
      */
     public function enqueue_scripts() {
-        wp_enqueue_script( 'field-image',  plugins_url( '/field-image.js', __FILE__ ), array( 'jquery' ), BASEPACK_VERSION );
+	
+        wp_enqueue_script( 'field-image',  BASEPACK_PLUGIN_URL . 'core/form/field-image.js', array( 'jquery' ), BASEPACK_VERSION );
     }
 
     /**

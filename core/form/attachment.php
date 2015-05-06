@@ -10,12 +10,12 @@ namespace Basepack\Core\Form;
 
 class Attachment extends Formelement {
     protected $type = 'attachment';
-
+    
     /**
      * dolacza skrypty js
      */
     private function enqueue_scripts() {
-	wp_enqueue_script( 'field-attachment', plugins_url( '/field-attachment.js', __FILE__ ), array( 'jquery' ), BASEPACK_VERSION );
+	wp_enqueue_script( 'field-attachment', BASEPACK_PLUGIN_URL . 'core/form/field-attachment.js', array( 'jquery' ), BASEPACK_VERSION );
         wp_enqueue_style( 'field-attachment', BASEPACK_PLUGIN_URL . 'core/form/attachment.css' );
     }
 
