@@ -26,6 +26,7 @@ if( !session_id() ) {
 
 //$base = \Basepack\Core\Base::init($loader);
 add_action( 'plugins_loaded', function() {
+    
     $loader = new Basepack\Core\Autoloader();
     $loader->register();
     $loader->addNamespace( 'Basepack\Core', BASEPACK_PLUGIN_DIR . 'core/' );
