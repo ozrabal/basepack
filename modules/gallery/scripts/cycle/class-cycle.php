@@ -3,6 +3,8 @@
  * Gallery Name: Pokaz slajdów
  * Description: Tworzy z obrazów w galerii pokaz slajdów z nawigacją
  */
+
+
 class Cycle{
 
     private $params;
@@ -19,8 +21,8 @@ class Cycle{
 	)
     );
     
-    function __construct( Gallery $gallery = null, Array $params = null ) {
-	if($gallery instanceof Gallery){
+    function __construct(Modules\Gallery\Gallery $gallery = null, Array $params = null ) {
+	if($gallery instanceof Modules\Gallery\Gallery){
 	    $gallery->include_files( $this->defaults['files']['scripts'] );
 	    $this->setup($gallery->params);
 	    $gallery->output = $this->create_gallery();
