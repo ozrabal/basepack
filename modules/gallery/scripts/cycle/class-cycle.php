@@ -106,7 +106,7 @@ class Cycle{
 
 
 
-	$output = '<div class="row"><div class="col-xs-12 col-sm-12">'.$pager.'<div id="'.$this->selector.'" class="cycle-slideshow '.$this->params['wrapper_class'].'"
+	$output = '<div class="'.$this->params['wrapper_class'].'">'.$pager.'<div class="row"><div id="'.$this->selector.'" class="cycle-slideshow"
 								data-cycle-fx=fade
 								data-cycle-timeout='.$timeout.'
 								
