@@ -18,6 +18,7 @@ class Image extends Formelement {
     public function enqueue_scripts() {
 	
         wp_enqueue_script( 'field-image',  BASEPACK_PLUGIN_URL . 'core/form/field-image.js', array( 'jquery' ), BASEPACK_VERSION );
+	wp_enqueue_style( 'field-attachment', BASEPACK_PLUGIN_URL . 'core/form/image.css' );
     }
 
     /**
