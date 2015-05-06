@@ -17,12 +17,16 @@ class Base {
      * @param \Basepack\Core\Autoloader $loader
      */
     public function __construct( Autoloader $loader ) {
+	
 	$this->loader = $loader;
+	add_action( 'admin_init', function() {
+	    wp_enqueue_style( 'basepack', BASEPACK_PLUGIN_URL . 'assets/css/basepack.css' );
+	} );
 	add_action( 'init', function() {
 	    do_action( 'basepack_pre_load_modules' );
 	    $this->load_modules();
 	    do_action( 'basepack_post_load_modules' );
-	});
+	} );
     }
 
     /**
