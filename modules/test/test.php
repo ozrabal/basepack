@@ -41,7 +41,7 @@ class Test {
 	$test_meta = array(
 	    'name'      => 'test_meta',
 	    'title'     => 'Pola dodatkowe',
-	    'post_type' => array( 'test' ),
+	    'post_type' => array( 'test', 'post' ),
 	    'elements'  => array(
 		array(
 		    'type'	=> 'text',
@@ -92,7 +92,7 @@ class Test {
                         'data'      => array(
                             'title'     => 'Image title',
                             'select'    => 'Select image',
-                            'mime'      => 'jpeg'
+                            'mime'      => 'image'
                         )
 		    ),
 		),
@@ -106,7 +106,7 @@ class Test {
                         'data'      => array(
                             'title'     => 'File title',
                             'select'    => 'Select file',
-                            'mime'      => 'zip'
+                            'mime'      => 'multipart'
                         )
 		    ),
 		),
