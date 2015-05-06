@@ -18,13 +18,14 @@ define( 'BASEPACK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BASEPACK_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 require 'core/_inc/functions.php';
 require 'core/autoloader.php';
+
 if( !session_id() ) {
 	    session_start();
 	}
 //add_action( 'init', array( '\\Basepack\\Core\\Base', 'init' ), 2 );
 
 //$base = \Basepack\Core\Base::init($loader);
-add_action( 'init', function() {
+add_action( 'plugins_loaded', function() {
     $loader = new Basepack\Core\Autoloader();
     $loader->register();
     $loader->addNamespace( 'Basepack\Core', BASEPACK_PLUGIN_DIR . 'core/' );

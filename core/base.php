@@ -18,9 +18,11 @@ class Base {
      */
     public function __construct( Autoloader $loader ) {
 	$this->loader = $loader;
-	do_action('basepack_pre_load_modules');
-	$this->load_modules();
-	do_action('basepack_post_load_modules');
+	add_action( 'init', function() {
+	    do_action( 'basepack_pre_load_modules' );
+	    $this->load_modules();
+	    do_action( 'basepack_post_load_modules' );
+	});
     }
 
     /**
