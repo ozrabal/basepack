@@ -17,7 +17,9 @@ class Cycle{
 	    'item_class' => '',
 	    'image_class' => 'img-responsive ',
 	    'size' => 'slide-large',
-	    'timeout' => 0
+	    'timeout' => 0,
+	    'pager' => true,
+	    'prevnext' => true
 	)
     );
     
@@ -58,7 +60,9 @@ class Cycle{
 		'size'       => $this->params['size'],
 		'include'    => '',
 		'exclude'    => '',
-		'timeout'   => $this->params['timeout']
+		'timeout'   => $this->params['timeout'],
+		'navigation'   => $this->params['pager'],
+	    'prevnext'	=>  $this->params['prevnext']
 	), $attr));
 
 	
@@ -91,6 +95,9 @@ class Cycle{
 	}
 	$this->selector = "gallery-{$this->instance}";
 	//if ( apply_filters( 'use_default_gallery_style', true ) )
+$pager = null;
+	if($navigation){
+
 	$pager = '<div class="row text-center cycle-nav" id="slide-navi'.$this->selector.'">
                                 <div class="col-xs-3 col-sm-4 text-left">
                                     <a id="prev'.$this->selector.'"><span class="glyphicon glyphicon-chevron-left pull-left"> </span> <span class="hidden-xs pull-left">'.__('Previous', 'pwp').'</span></a>
@@ -101,21 +108,22 @@ class Cycle{
                                     <a id="next'.$this->selector.'"><span class="glyphicon glyphicon-chevron-right pull-right"> </span> <span class="hidden-xs pull-right">'.__('Next','pwp').'</span></a>
                                 </div>
                             </div>';
+	}
+$prev_next = null;
+if($prevnext){
+    $prev_next = '<div id="prev'.$this->selector.'" class="carousel-control left btn btn-primary"><</div>
+            <div id="next'.$this->selector.'" class="carousel-control right btn btn-primary">></div>';
+}
 
 
-
-
-
-	$output = '<div class="'.$this->params['wrapper_class'].'">'.$pager.'<div class="row"><div id="'.$this->selector.'" class="cycle-slideshow"
+	$output = ''.$pager.$prev_next.'<div id="'.$this->selector.'" class="cycle-slideshow '.$this->params['wrapper_class'].'"
 								data-cycle-fx=fade
 								data-cycle-timeout='.$timeout.'
 								
 								data-cycle-pager="#slide-navi'.$this->selector.'"
 								data-cycle-slides=".gallery-slide"
 								data-cycle-auto-height="calc"
-								zdata-cycle-pager-template="<a data-target=\'#'.$this->selector.'\' data-slide-to={{slideNum}}>{{slideNum}}</a>"
-								zdata-cycle-pager-template=""
-								data-cycle-pager="#slide-navi'.$this->selector.'"
+								sdata-cycle-pager="#slide-navi'.$this->selector.'"
 								    data-cycle-prev="#prev'.$this->selector.'"
                                         data-cycle-next="#next'.$this->selector.'"
 >';
@@ -134,7 +142,7 @@ class Cycle{
 		}
 	}
 	//$pager .= "</div>";
-	$output .= '</div> ';
+	//$output .= '</div> ';
 	//$output .= $pager;
 	//$output .= '<div id="slide-navi'.$this->selector.'" class="gallery-slide-navi"></div>';
 	$output .= '</div> ';
