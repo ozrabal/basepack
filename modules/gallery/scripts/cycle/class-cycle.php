@@ -19,7 +19,8 @@ class Cycle{
 	    'size' => 'slide-large',
 	    'timeout' => 0,
 	    'pager' => true,
-	    'prevnext' => true
+	    'prevnext' => true,
+	    'image_caption' => true
 	)
     );
     
@@ -111,12 +112,12 @@ $pager = null;
 	}
 $prev_next = null;
 if($prevnext){
-    $prev_next = '<div id="prev'.$this->selector.'" class="carousel-control left btn btn-primary"><</div>
-            <div id="next'.$this->selector.'" class="carousel-control right btn btn-primary">></div>';
+    $prev_next = '<div id="prev'.$this->selector.'" class="carousel-control left btn btn-primary"></div>
+            <div id="next'.$this->selector.'" class="carousel-control right btn btn-primary"></div>';
 }
 
 
-	$output = ''.$pager.$prev_next.'<div id="'.$this->selector.'" class="cycle-slideshow '.$this->params['wrapper_class'].'"
+	$output = '<div id="'.$this->selector.'" class="cycle-slideshow '.$this->params['wrapper_class'].'"
 								data-cycle-fx=fade
 								data-cycle-timeout='.$timeout.'
 								
@@ -135,7 +136,8 @@ if($prevnext){
 		$link = '<img src="'. $img[0] .'" alt="" class="'.$this->params['image_class'].'"/>';
 		//$pager .= '<img src="'. $img[0] .'" alt="" />';
 		$output .= '<div class="gallery-slide col-xs-12 col-sm-12">'.$link.'</div>';
-		if ( trim($attachment->post_excerpt) ) {
+		
+		if ( $this->params['image_caption'] && trim($attachment->post_excerpt) ) {
 			$output .= "<div class='wp-caption-text gallery-caption'>
 			" . wptexturize($attachment->post_excerpt) . "
 			</div>";
@@ -145,7 +147,7 @@ if($prevnext){
 	//$output .= '</div> ';
 	//$output .= $pager;
 	//$output .= '<div id="slide-navi'.$this->selector.'" class="gallery-slide-navi"></div>';
-	$output .= '</div> ';
+	$output .= ''.$pager.$prev_next.'</div> ';
 	return $output;
     }
 }
