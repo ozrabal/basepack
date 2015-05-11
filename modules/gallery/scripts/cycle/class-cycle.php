@@ -4,7 +4,6 @@
  * Description: Tworzy z obrazów w galerii pokaz slajdów z nawigacją
  */
 
-
 class Cycle{
 
     private $params;
@@ -20,7 +19,11 @@ class Cycle{
 	    'timeout' => 0,
 	    'pager' => true,
 	    'prevnext' => true,
-	    'image_caption' => true
+	    'image_caption' => true,
+	    'fx'=>'fade',
+	    'auto_height' => 'container'
+
+
 	)
     );
     
@@ -118,13 +121,14 @@ if($prevnext){
 
 
 	$output = '<div id="'.$this->selector.'" class="cycle-slideshow '.$this->params['wrapper_class'].'"
-								data-cycle-fx=fade
+								data-cycle-fx='.$this->params['fx'].'
+
 								data-cycle-timeout='.$timeout.'
 								
 								data-cycle-pager="#slide-navi'.$this->selector.'"
 								data-cycle-slides=".gallery-slide"
-								data-cycle-auto-height="calc"
-								sdata-cycle-pager="#slide-navi'.$this->selector.'"
+								data-cycle-auto-height='.$this->params['auto_height'].'
+								
 								    data-cycle-prev="#prev'.$this->selector.'"
                                         data-cycle-next="#next'.$this->selector.'"
 >';
@@ -135,7 +139,8 @@ if($prevnext){
 		$img = wp_get_attachment_image_src($id, $size);
 		$link = '<img src="'. $img[0] .'" alt="" class="'.$this->params['image_class'].'"/>';
 		//$pager .= '<img src="'. $img[0] .'" alt="" />';
-		$output .= '<div class="gallery-slide col-xs-12 col-sm-12">'.$link.'</div>';
+		$output .= '<div class="gallery-slide afocuspoint col-xs-12 col-sm-12" data-focus-x="0.0"
+                    data-focus-y="0.0">'.$link.'</div>';
 		
 		if ( $this->params['image_caption'] && trim($attachment->post_excerpt) ) {
 			$output .= "<div class='wp-caption-text gallery-caption'>
