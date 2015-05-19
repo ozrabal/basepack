@@ -193,12 +193,14 @@ class Metabox extends Form {
             return $error;
         }
     }
+
     
+
     /*
      * add metabox to specified one or many post types
      */
     public function add_box() {
-        
+
         if ( is_array( $this->post_type ) ) {
             foreach( $this->post_type as $post_type ) {
                 $this->set_box( $post_type );
@@ -281,7 +283,7 @@ class Metabox extends Form {
         }  
         return '<tr ><td>' . $element->render() . '</tr></td>';
     }
-    
+
     /**
      * renderuje metabox i wypelnia go danymi
      * @return boolean
