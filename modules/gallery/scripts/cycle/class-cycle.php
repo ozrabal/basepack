@@ -124,7 +124,7 @@ if($prevnext){
 
 	$output = '<div id="'.$this->selector.'" class="cycle-slideshow '.$this->params['wrapper_class'].'"
 								data-cycle-fx='.$this->params['fx'].'
-								data-cycle-loader='.$this->params['loader'].',
+								data-cycle-loader='.$this->params['loader'].'
 								data-cycle-timeout='.$timeout.'
 								
 								data-cycle-pager="#slide-navi'.$this->selector.'"
