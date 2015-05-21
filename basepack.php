@@ -30,6 +30,7 @@ add_action( 'plugins_loaded', function() {
     $loader = new Basepack\Core\Autoloader();
     $loader->register();
     $loader->addNamespace( 'Basepack\Core', BASEPACK_PLUGIN_DIR . 'core/' );
+    $loader->addNamespace( 'Basepack\Library', BASEPACK_PLUGIN_DIR . 'library/' );
     $basepack = new Basepack\Core\Base($loader);
 });
 
