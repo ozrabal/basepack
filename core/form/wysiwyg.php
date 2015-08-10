@@ -60,7 +60,7 @@ class Wysiwyg extends Formelement {
      */
     public function enqueue_scripts() {
 
-	wp_enqueue_script( 'field-wysiwyg',  plugins_url( '/field-wysiwyg.js', __FILE__ ), array( 'jquery' ), BASEPACK_VERSION );
+	wp_enqueue_script( 'field-wysiwyg',  BASEPACK_PLUGIN_URL . 'core/form/field-wysiwyg.js', array( 'jquery' ), BASEPACK_VERSION );
     }
     
     /**
