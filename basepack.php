@@ -32,8 +32,13 @@ add_action( 'plugins_loaded', function() {
     $loader->addNamespace( 'Basepack\Core', BASEPACK_PLUGIN_DIR . 'core/' );
     $loader->addNamespace( 'Basepack\Library', BASEPACK_PLUGIN_DIR . 'library/' );
     $basepack = new Basepack\Core\Base($loader);
+
 });
 
+//add_action('basepack_post_load_modules', function(){
+//    new \Basepack\Core\Shortcodeui();
+//
+//});
 //add_action('basepack_pre_load_modules', 'd');
 //function d(){
 //    echo __FUNCTION__;
