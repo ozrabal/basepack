@@ -5,6 +5,17 @@ namespace Modules\Test;
 class Test {
 
     public function __construct() {
+	
+	add_action( 'admin_enqueue_scripts', function(){
+	    wp_enqueue_script( 'test', BASEPACK_PLUGIN_URL . 'modules/test/test.js', array( 'jquery',
+				'backbone',
+				'underscore',
+				'wp-util' ), true, true );
+
+	    wp_enqueue_style( 'test', BASEPACK_PLUGIN_URL . 'modules/test/modal.css' );
+
+	});
+	
 
 	$test_labels = array(
 	    'name'               => __( 'Test', 'pwp' ),
@@ -273,7 +284,41 @@ class Test {
         );
         
         new \Basepack\Core\Taxmeta( $test_tax_meta );
-        
+
+
+
+
+//shortcode_ui_register_for_shortcode( 'xno-attributes', array(
+//		'label'        => 'xhortcake With No Attributes',
+//    'description' => 'ddd'
+//		) );
+//
+//add_shortcode( 'bartag', array($this, 'bartag_func') );
+add_action('media_buttons',  array($this ,'add_my_media_button'));
+
+
+add_action( 'admin_footer-post-new.php',array( $this,'add_templates' ) );
+		add_action( 'admin_footer-post.php',array(  $this,  'add_templates' ) );
+
     }
 
+public function add_templates() {
+		include 'template-data.php';
+		include 'edit-form.php';
+	}
+
+
+   public function add_my_media_button() {
+       dump(__METHOD__);
+    echo '<a href="#" id="modal" class="button">Modal</a>';
+}
+
+    	public function bartag_func( $atts ) {
+    $a = shortcode_atts( array(
+        'foo' => 'something',
+        'bar' => 'something else',
+    ), $atts );
+
+    return "foo = {$a['foo']}";
+}
 }
