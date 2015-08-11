@@ -20,7 +20,7 @@ class Base {
 	
 	$this->loader = $loader;
 	add_action( 'admin_init', function() {
-	    wp_enqueue_style( 'basepack', BASEPACK_PLUGIN_URL . 'assets/css/basepack.css' );
+	    wp_enqueue_style( 'basepack', BASEPACK_PLUGIN_URL . 'assets/css/basepack.css' );    
 	} );
 	add_action( 'init', function() {
 	    do_action( 'basepack_pre_load_modules' );
