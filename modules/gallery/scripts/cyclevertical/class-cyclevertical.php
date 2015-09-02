@@ -107,7 +107,7 @@ class Cyclevertical{
 $pager = null;
 	if($navigation){
 
-	$pagers = '<div class="row text-center cycle-nav" id="slide-navi'.$this->selector.'">
+	$pagers = '<div class="zrow text-center cycle-nav" id="slide-navi'.$this->selector.'">
                                 <div class="col-xs-3 col-sm-4 text-left">
                                     <a id="prev'.$this->selector.'"><span class="glyphicon glyphicon-chevron-left pull-left"> </span> <span class="hidden-xs pull-left">'.__('Previous', 'pwp').'</span></a>
                                 </div>
@@ -120,12 +120,12 @@ $pager = null;
 	}
 $prev_next = null;
 if($prevnext){
-    $prev_next = '<div class="row"><div id="prev'.$this->selector.'" class="col-sm-6 zcarousel-control aleft btn btn-primary">p</div>
-            <div id="next'.$this->selector.'" class="col-sm-6 zcarousel-control aright btn btn-primary">n</div></div>';
+    $prev_next = '<div class="srow"><div id="prev'.$this->selector.'" class="col-sm-6 zcarousel-control aleft "><span class="fa fa-angle-down"></span></div>
+            <div id="next'.$this->selector.'" class="col-sm-6 zcarousel-control aright "><span class="fa fa-angle-up"></span></div></div>';
 }
 
 
-	$output = '<div id="'.$this->selector.'" class="row cycle-slideshow clearfix vertical '.$this->params['wrapper_class'].'"
+	$output = '<div id="'.$this->selector.'" class="srow cycle-slideshow clearfix vertical '.$this->params['wrapper_class'].'"
 								data-cycle-fx='.$this->params['fx'].'
 								data-cycle-carousel-visible='.$this->params['visible'].'
 								data-cycle-loader='.$this->params['loader'].'
@@ -143,7 +143,8 @@ if($prevnext){
 
 	foreach ( $attachments as $id => $attachment ) {
 		$img = wp_get_attachment_image_src($id, $size);
-		$link = '<img src="'. $img[0] .'" alt="" class="'.$this->params['image_class'].'"/>';
+		$img_big = wp_get_attachment_image_src($id, 'large');
+		$link = '<a href="'.$img_big[0].'" class="lightbox" ><img src="'. $img[0] .'" alt="" class="'.$this->params['image_class'].'"/></a>';
 		//$pager .= '<img src="'. $img[0] .'" alt="" />';
 		$output .= '<div class="gallery-slide">'.$link.'</div>';
 		
