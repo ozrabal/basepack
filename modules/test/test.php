@@ -52,9 +52,18 @@ class Test {
 	$test_meta = array(
 	    'name'      => 'test_meta',
 	    'title'     => 'Pola dodatkowe',
-	    'post_type' => array( 'test','page' ),
+	    'post_type' => array( 'test'/*,'page'*/ ),
         'allow_posts'=> array('rule' => 'template','params'=>'contributors.php' ),
 	    'elements'  => array(
+		array(
+		    'type'	=> 'color',
+		    'name'	=> 'color',
+		    'params'	=> array(
+			'label'	    => 'Color Label',
+			'comment'   => 'Comment',
+			'class'	    => 'color-field'
+		    ),
+		),
 		array(
 		    'type'	=> 'text',
 		    'name'	=> 'text',
