@@ -236,12 +236,37 @@ function renumber_helper(index,element) {
     name = input.name;
     input.name = name.replace(/(\d+)/,index);
   }
+
+  for (j = 0; j < inputs.length; j++) {
+    input = inputs[j];
+    id = input.id;
+    input.id = id.replace(/(\d+)/,index);
+  }
+
   textareas = jQuery('textarea',element);
   for (j = 0; j < textareas.length; j++) {
      textarea = textareas[j];
      name = textarea.name;
      textarea.name = name.replace(/(\d+)/,index);
   }
+  
+
+  for (j = 0; j < textareas.length; j++) {
+     textarea = textareas[j];
+     id = textarea.id;
+     textarea.id = id.replace(/(\d+)/,index);
+  }
+
+  buttons = jQuery('button',element);
+  for (j = 0; j < buttons.length; j++) {
+
+     button = buttons[j];
+     //console.log(jQuery(button).data('editor'));
+     editor = jQuery(button).data('editor');
+	     //textarea.name = name.replace(/(\d+)/,index);
+	    jQuery(button).data('editor',editor.replace(/(\d+)/,index));
+  }
+
   selects = jQuery('select',element);
   for (j = 0; j < selects.length; j++) {
     select = selects[j];
