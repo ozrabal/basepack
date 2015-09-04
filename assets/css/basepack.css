@@ -113,3 +113,13 @@ input:disabled.disabled-noframe, textarea.disabled.disabled-noframe {
 
 }
 
+.pwp-metabox .wp-picker-container,
+.pwp-metabox .wp-picker-container:active {
+margin: 0 10px;
+   line-height: 35px;
+}
+.wp-core-ui .pwp-metabox  .button-group.button-small .button.wp-picker-clear,
+.wp-core-ui .pwp-metabox  .button.button-small.wp-picker-clear {
+
+    margin: 5px;
+}
