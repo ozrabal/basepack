@@ -257,6 +257,18 @@ class Metabox extends Form {
         return false;
     }
     
+/**
+* @todo sprawdzic takie cos
+*/
+private function allow_template( $template_name ){
+    dump(get_post_meta( 2, '_wp_page_template', true ));
+    global $post;
+    if ( $template_name == get_post_meta( $post->ID, '_wp_page_template', true )){
+        return false;
+    }
+    return true;
+}
+
     /**
      * display error message
      */

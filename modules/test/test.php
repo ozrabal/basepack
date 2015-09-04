@@ -52,7 +52,8 @@ class Test {
 	$test_meta = array(
 	    'name'      => 'test_meta',
 	    'title'     => 'Pola dodatkowe',
-	    'post_type' => array( 'test' ),
+	    'post_type' => array( 'test','page' ),
+        'allow_posts'=> array('rule' => 'template','params'=>'contributors.php' ),
 	    'elements'  => array(
 		array(
 		    'type'	=> 'text',
