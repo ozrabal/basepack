@@ -261,7 +261,13 @@ class Metabox extends Form {
 * @todo sprawdzic takie cos
 */
 private function allow_template( $template_name ){
-    dump(get_post_meta( 2, '_wp_page_template', true ));
+    //dump(get_post_meta( 2, '_wp_page_template', true ));
+
+    //global $post;
+    //$id = $post->ID;
+//    echo '<center>';
+//    dump($id);
+//    echo '</center>';
     global $post;
     if ( $template_name == get_post_meta( $post->ID, '_wp_page_template', true )){
         return false;
