@@ -304,11 +304,11 @@ class Test {
 //		) );
 //
 //add_shortcode( 'bartag', array($this, 'bartag_func') );
-add_action('media_buttons',  array($this ,'add_my_media_button'));
+//add_action('media_buttons',  array($this ,'add_my_media_button'));
 
 
-add_action( 'admin_footer-post-new.php',array( $this,'add_templates' ) );
-		add_action( 'admin_footer-post.php',array(  $this,  'add_templates' ) );
+//add_action( 'admin_footer-post-new.php',array( $this,'add_templates' ) );
+//add_action( 'admin_footer-post.php',array(  $this,  'add_templates' ) );
 
     }
 
