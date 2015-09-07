@@ -39,7 +39,6 @@ class Color extends Formelement {
 	if(!empty($this->palettes)){
             wp_localize_script( 'wp-color-picker', 'palettes', json_encode( $this->palettes ) );
         }
-        
     }
 
     /**

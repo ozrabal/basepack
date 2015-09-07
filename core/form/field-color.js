@@ -1,18 +1,18 @@
 jQuery(function(jQuery) {
-    
-    if(typeof palettes != undefined){
-        var palettes = jQuery.parseJSON( palettes );
+    if( typeof palettes !== undefined ){
+        var predefined_palettes = jQuery.parseJSON( palettes );
     } else {
-        var palettes = [];
+        var predefined_palettes = {};
     }
-    
-        jQuery('.color-field').wpColorPicker({
-	    palettes: palettes
+    function init(){
+	jQuery( '.color-field' ).wpColorPicker({
+	    palettes: predefined_palettes
 	});
-        jQuery('.color-field').wpColorPicker( 'destroy' );
-        
-        jQuery('.repeatable-add').click(function(e) {
-            //alert();
-        
+    }
+    init();
+    //repetable
+    jQuery( '.repeatable-add' ).click(function(e) {
+	jQuery( '.repeatable-item:last-child .wp-color-result' ).remove();
+	init();
     });
-    });
+});
