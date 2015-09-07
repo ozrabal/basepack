@@ -1,113 +1,4 @@
-//jQuery(function(jQuery) {
-//jQuery('.repeatable-add').click(function() {
-//	field = jQuery(this).closest('td').find('.custom_repeatable li:last').clone(true);
-//	fieldLocation = jQuery(this).closest('td').find('.custom_repeatable li:last');
-//	jQuery('input', field).val('').attr('name', function(index, name) {
-//		return name.replace(/(\d+)/, function(fullMatch, n) {
-//			return Number(n) + 1;
-//		});
-//	})
-//	field.insertAfter(fieldLocation, jQuery(this).closest('td'))
-//	return false;
-//});
-//
-//jQuery('.repeatable-remove').click(function(){
-//	jQuery(this).parent().remove();
-//	return false;
-//});
-//	
-//jQuery('.ui-sortable').sortable({
-//	opacity: 0.6,
-//	revert: true,
-//	cursor: 'move',
-//	handle: '.order'
-//});
-//
-//
-//});
-
-//
-//
-//jQuery(document).ready(function($) {
-//$(".ui-sortable").sortable({items: 'tr'});
-//
-//
-//// Return a helper with preserved width of cells
-//
-//
-//var fixHelper = function(e, ui) {
-//	ui.children().each(function() {
-//		$(this).width($(this).width());
-//	});
-//	return ui;
-//};
-//
-//$(".ui-sortable").sortable({
-//    items: 'tr',
-//	helper: fixHelper
-//});
-//
-//});
-
-
-
-//
-//
-//////alert('repetable');
-//
-//
 jQuery(function(jQuery) {
-	// Add media to post
-//	jQuery('.add-image').click(function() {
-//		formID = jQuery(this).attr('rel');
-//		formfield = jQuery(this).siblings('.upload_image');
-//		preview = jQuery(this).siblings('.preview_image');
-//		tb_show('Choose Image', 'media-upload.php?post_id=' + formID + '&type=image&TB_iframe=1');
-//		window.orig_send_to_editor = window.send_to_editor;
-//		window.send_to_editor = function(html) {
-//			imgurl = html.match(/<img.*?src="(.*?)"/);
-//			id = html.match(/wp-image-(.*?)"/, '');
-//			formfield.val(id[1]);
-//			preview.attr('src', imgurl[1]);
-//			tb_remove();
-//			window.send_to_editor = window.orig_send_to_editor;
-//		}
-//		return false;
-//	});
-
-	// Delete uploaded image
-//	jQuery('.remove-image').click(function() {
-//		var defaultImage = jQuery(this).parent().siblings('.default_image').text();
-//
-//		jQuery(this).parent().siblings('.upload_image').val(''); // Clean up the values
-//		jQuery(this).parent().siblings('.preview_image').attr('src', defaultImage); // Clean up the values
-//		return false;
-//	});
-
-	// Add repeatable row
-//	jQuery('.repeatable-add').click(function() {
-//	   
-//		// Set min of rows
-//		//var minNumberOfProducts = 2;
-//		var uniqueID = document.querySelectorAll('.row').length;
-//
-//		// Declared variable
-//		var row = jQuery(this).closest('.ui-sortable').find('tbody tr.row:last-child');
-//		var clone = row.clone(true);
-//
-//		// Find the cloned fields and reset the values of it
-//		//clone.find('input[type=text], text, textarea, select, input.upload_image').val(''); // Reset the values
-//		//clone.find('.preview_image').attr('src', ''); // Reset the values
-//
-//		// Add new attribute to element
-//		//jQuery('.row').attr('id', 'repeatable-[' + uniqueID + ']');
-// //alert(uniqueID);
-//console.log(clone);
-//		row.insertAfter(clone);
-//
-//		//
-//		return false;
-//	});
 
  ile = jQuery('.repeatable-item').length;
 	   
@@ -126,7 +17,7 @@ function set_default_inputs(field){
 jQuery('.repeatable-add').click(function(e) {
     e.preventDefault();
 
-    f = jQuery(this).parent().find('.repeatable-item:last-child').append('<hr class="this">');
+    f = jQuery(this).parent().find('.repeatable-item:last-child');
 
 
     jQuery('.repeatable-remove',f).removeClass('disable');
@@ -160,7 +51,7 @@ var id=1;
 
 
  ile = jQuery(this).find('.repeatable-item').length;
-console.log(jQuery(this));
+//console.log(jQuery(this));
     renumber(this);
 
 
@@ -189,7 +80,7 @@ console.log(jQuery(this));
 	jQuery(document).on('click','.repeatable-remove',function(e){
 	    e.preventDefault();
 	     ile = jQuery(this).parent().parent().parent().find('.repeatable-item').length;
-            console.log(ile);
+            //console.log(ile);
             //alert(ile);
             //exit;
 if(ile >1){

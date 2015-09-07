@@ -1,7 +1,7 @@
 var ds = ds || {};
 var b;
 var d;
-console.log('image');
+//console.log('image');
 ( function( $ ) {
     var data_attributes;
     var mime;
