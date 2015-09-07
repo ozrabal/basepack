@@ -45,7 +45,7 @@ class Test {
 	    'has_archive'        => true,
 	    'hierarchical'       => false,
 	    'menu_position'      => null,
-	    'supports'           => array( 'title', 'thumbnail', 'editor', 'page-attributes' )
+	    'supports'           => array( 'title'/*, 'thumbnail', 'editor', 'page-attributes' */)
 	);
 	register_post_type( 'test', $test_args );
 
@@ -53,8 +53,38 @@ class Test {
 	    'name'      => 'test_meta',
 	    'title'     => 'Pola dodatkowe',
 	    'post_type' => array( 'test'/*,'page'*/ ),
-        'allow_posts'=> array('rule' => 'template','params'=>'contributors.php' ),
+        //'allow_posts'=> array('rule' => 'template','params'=>'contributors.php' ),
 	    'elements'  => array(
+		array(
+		    'type'	=> 'repeatable',
+		    'name'	=> 'repeatable',
+		    'params'	=> array(
+			'label'	=> 'Repeatable Label',
+			'comment'   => 'Comment',
+			'class'	    => '',
+			'repeater'  => array(
+			    array(
+				'type'	=> 'text',
+				'name'	=> 'repeatable_text',
+				'params'=> array(
+				    'label'	=> 'Repeatable Text Label',
+				    'comment'   => 'Comment',
+				    'class'	=> 'large-text'
+				)
+			    ),
+                            array(
+				'type'	=> 'color',
+				'name'	=> 'repeatable_color',
+				'params'=> array(
+				    'label'	=> 'Repeatable Color Label',
+				    'comment'   => 'Comment',
+				    'class'	=> '',
+				    'palettes' => array('#4E567D', '#006EAB', '#8781BD', '#EB008B', '#00B38A', '#BFCCD3')
+				)
+			    )
+			)
+		    )
+		),
 		array(
 		    'type'	=> 'color',
 		    'name'	=> 'color',
@@ -144,35 +174,7 @@ class Test {
 			)
 		    ),
 		),
-		array(
-		    'type'	=> 'repeatable',
-		    'name'	=> 'repeatable',
-		    'params'	=> array(
-			'label'	=> 'Repeatable Label',
-			'comment'   => 'Comment',
-			'class'	    => '',
-			'repeater'  => array(
-			    array(
-				'type'	=> 'text',
-				'name'	=> 'repeatable_text',
-				'params'=> array(
-				    'label'	=> 'Repeatable Text Label',
-				    'comment'   => 'Comment',
-				    'class'	=> 'large-text'
-				)
-			    ),
-                            array(
-				'type'	=> 'color',
-				'name'	=> 'repeatable_color',
-				'params'=> array(
-				    'label'	=> 'Repeatable Color Label',
-				    'comment'   => 'Comment',
-				    'class'	=> ''
-				)
-			    )
-			)
-		    )
-		)
+		
 	    )
 	);
 	

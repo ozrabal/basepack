@@ -168,7 +168,17 @@ console.log(jQuery(this));
  d = jQuery(b).next();
 
  jQuery(ds.media.init);
-	
+
+
+
+			
+
+			//console.log(jQuery('.repeatable-item:last-child .wp-color-result'));
+
+
+
+
+
 	return false;
 });
 
@@ -190,8 +200,14 @@ if(ile >1){
                 jQuery(this).closest('.repeatable-item').remove();
                 
                 //jQuery(v).addClass('this')
-		console.log(jQuery(this).closest('table').addClass('this'));
+		//console.log(jQuery(this).closest('table').addClass('this'));
                 renumber(v);
+
+
+
+
+
+
 		return false;
 }else{
     //jQuery('.repeatable-item').find('input[type=text], input[type=hidden], text, textarea, select, checkbox').val(''); // Reset the values
@@ -200,6 +216,9 @@ jQuery(this).addClass('disable');
 		set_default_inputs('.repeatable-item')
 		return false;
 }
+
+
+
 	    });
         
        //var list = jQuery('.ui-sortable'); 
@@ -221,7 +240,7 @@ function showNameAsValue(el) {
 function renumber(item) {
   //tr = item[0].parentNode;
   
-    console.log(jQuery(item).parent());
+    //console.log(jQuery(item).parent());
   
   jQuery(item).parent().find('.repeatable-item').each(function(index,element) {
     renumber_helper(index,element); 
