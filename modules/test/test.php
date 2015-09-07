@@ -78,7 +78,7 @@ class Test {
 				'params'=> array(
 				    'label'	=> 'Repeatable Color Label',
 				    'comment'   => 'Comment',
-				    'class'	=> '',
+				    'default_color' => '#ffffff',
 				    'palettes' => array('#4E567D', '#006EAB', '#8781BD', '#EB008B', '#00B38A', '#BFCCD3')
 				)
 			    )
@@ -91,7 +91,8 @@ class Test {
 		    'params'	=> array(
 			'label'	    => 'Color Label',
 			'comment'   => 'Comment',
-			'class'	    => 'color-field'
+			'class'	    => 'color-field',
+			'default_color' => '#ffffff'
 		    ),
 		),
 		array(
