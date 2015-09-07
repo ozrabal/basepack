@@ -31,12 +31,23 @@ class Color extends Formelement {
     public function set_palettes( $palettes ) {
 	$this->palettes = $palettes;
     }
+
+    /**
+     * ustawia domyslny kolor pickera
+     * @param string $default_color
+     */
     public function set_default_color( $default_color ){
 	$this->default_color = $default_color;
     }
+
+    /**
+     * zwraca domyslny kolor pickera
+     * @return string
+     */
     public function get_default_color(){
 	return $this->default_color;
     }
+    
     /**
      * dolacza skrypty js
      */
@@ -47,7 +58,7 @@ class Color extends Formelement {
             wp_localize_script( 'wp-color-picker', 'palettes', json_encode( $this->palettes ) );
 	    
         }
-	wp_localize_script( 'wp-color-picker', 'default_color', '#ffffff' );
+	wp_localize_script( 'wp-color-picker', 'default_color', $this->get_default_color() );
     }
 
     /**
