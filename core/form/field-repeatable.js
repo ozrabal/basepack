@@ -299,6 +299,13 @@ function renumber_helper(index,element) {
   }
 
 
+//jQuery('.color-field').wpColorPicker('destroy');
+
+//jQuery('.color-field').wpColorPicker({
+//	    //palettes: palettes
+//	});
+
+
 }
 
 

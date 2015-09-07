@@ -36,7 +36,10 @@ class Color extends Formelement {
     public function enqueue_scripts() {
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_script( 'field-color',  BASEPACK_PLUGIN_URL . 'core/form/field-color.js', array( 'jquery', 'wp-color-picker' ), BASEPACK_VERSION );
-	wp_localize_script( 'wp-color-picker', 'palettes', json_encode( $this->palettes ) );
+	if(!empty($this->palettes)){
+            wp_localize_script( 'wp-color-picker', 'palettes', json_encode( $this->palettes ) );
+        }
+        
     }
 
     /**

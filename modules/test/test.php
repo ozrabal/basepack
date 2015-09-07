@@ -160,6 +160,15 @@ class Test {
 				    'comment'   => 'Comment',
 				    'class'	=> 'large-text'
 				)
+			    ),
+                            array(
+				'type'	=> 'color',
+				'name'	=> 'repeatable_color',
+				'params'=> array(
+				    'label'	=> 'Repeatable Color Label',
+				    'comment'   => 'Comment',
+				    'class'	=> ''
+				)
 			    )
 			)
 		    )
