@@ -45,7 +45,7 @@ class Test {
 	    'has_archive'        => true,
 	    'hierarchical'       => false,
 	    'menu_position'      => null,
-	    'supports'           => array( 'title'/*, 'thumbnail', 'editor', 'page-attributes' */)
+	    'supports'           => array( 'title', 'page-attributes'/*, 'thumbnail', 'editor', 'page-attributes' */)
 	);
 	register_post_type( 'test', $test_args );
 
