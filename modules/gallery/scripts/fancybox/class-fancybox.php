@@ -93,28 +93,44 @@ class Fancybox extends Modules\Gallery\Gallery{
 	$selector = "gallery-{$instance}";
 	//if ( apply_filters( 'use_default_gallery_style', true ) )
 	$output .= '<div class=" container-gallery"><div id="'.$selector.'" class="gallery-lightbox  '.$this->params['wrapper_class'].'  galleryid-'.$id.'">';
-$columns_g = round(12/$columns);
 
+	if($columns){
+	    $columns_g = round(12/$columns);
+	}
 	$i = 0;
+
+
+
 	foreach ( $attachments as $id => $attachment ) {
 		//$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
 		//$link =  wp_get_attachment_link($id, $size, false, false);
 	    $src = wp_get_attachment_image_src( $id , 'large',true);
+$link = '';
+	    if($columns){
 
-	    if($columns == 1){
+	    if($columns === 1){
 		$link = '<div>';
 	    }else{
 		$link = '<div class="col-xs-6 col-sm-'.$columns_g.' ">';
 	    }
-$link .= '<div class="thumbnail"><a href="'. $src[0].'" class="'.$this->params['item_class'].'" rel="'.$selector.'" title="'.wptexturize($attachment->post_excerpt).'">'.wp_get_attachment_image( $id, $size, null, array( 'class' => $this->params['image_class']) ).'</a>';
+
+	    }
+
+
+$link .= '<a href="'. $src[0].'" class="lightbox '.$this->params['item_class'].'" rel="'.$selector.'" title="'.wptexturize($attachment->post_excerpt).'">'.wp_get_attachment_image( $id, $size, null, array( 'class' => $this->params['image_class']) ).'</a>';
 		
 		$caption = null;
 
 		if ($this->params['image_caption'] && trim($attachment->post_excerpt) ) {
 			$caption= '<div class="caption hidden-xs">' . wptexturize($attachment->post_excerpt) . '</div>';
 		}
-		$output .= $link.$caption.'</div></div>';
+		$output .= $link.$caption.'';
+		if($columns){
+
+		    $output .= "</div>";
 	}
+	}
+	
 	$output .= "</div></div>\n";
 	return $output;
     }
