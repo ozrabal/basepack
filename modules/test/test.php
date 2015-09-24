@@ -11,9 +11,7 @@ class Test {
 				'backbone',
 				'underscore',
 				'wp-util' ), true, true );
-
 	    wp_enqueue_style( 'test', BASEPACK_PLUGIN_URL . 'modules/test/modal.css' );
-
 	});
 	
 
@@ -323,24 +321,24 @@ class Test {
 //add_action( 'admin_footer-post.php',array(  $this,  'add_templates' ) );
 
     }
-
-public function add_templates() {
-		include 'template-data.php';
-		include 'edit-form.php';
-	}
-
-
-   public function add_my_media_button() {
-       dump(__METHOD__);
-    echo '<a href="#" id="modal" class="button">Modal</a>';
-}
-
-    	public function bartag_func( $atts ) {
-    $a = shortcode_atts( array(
-        'foo' => 'something',
-        'bar' => 'something else',
-    ), $atts );
-
-    return "foo = {$a['foo']}";
-}
+//
+//public function add_templates() {
+//		include 'template-data.php';
+//		include 'edit-form.php';
+//	}
+//
+//
+//   public function add_my_media_button() {
+//       dump(__METHOD__);
+//    echo '<a href="#" id="modal" class="button">Modal</a>';
+//}
+//
+//    	public function bartag_func( $atts ) {
+//    $a = shortcode_atts( array(
+//        'foo' => 'something',
+//        'bar' => 'something else',
+//    ), $atts );
+//
+//    return "foo = {$a['foo']}";
+//}
 }
