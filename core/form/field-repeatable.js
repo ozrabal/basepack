@@ -174,7 +174,9 @@ function renumber_helper(index,element) {
      //console.log(jQuery(button).data('editor'));
      editor = jQuery(button).data('editor');
 	     //textarea.name = name.replace(/(\d+)/,index);
+	     //if(jQuery(button).data('editor')){
 	    jQuery(button).data('editor',editor.replace(/(\d+)/,index));
+	     //}
   }
 
   selects = jQuery('select',element);
