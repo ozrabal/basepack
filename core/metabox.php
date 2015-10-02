@@ -155,31 +155,73 @@ class Metabox extends Form {
      * @global object $current_screen
      * @param int $post_id
      */
+//    public function asave( $post_id ) {
+//
+//        global $current_screen;
+//        foreach( $this->elements as $element ) {
+//            $old = get_post_meta( $post_id, $element->get_name(), true );
+//	    $save[$element->get_name()] = $this->get_input_data( $element->get_name() );
+//            $_SESSION['p_'.$post_id][$element->get_name()] = $save[$element->get_name()];
+//	    //dump($save);
+//            if ( isset( $current_screen ) && $current_screen->action != 'add' && $element->get_validator() ) {
+//                $error = $this->is_error( $element, $save );
+//            }
+//        }
+//        if( !isset( $error ) ) {
+//	    //echo $this->elements[$element];
+//            if ( isset( $old ) &&  is_array( $old ) ) {
+//                $meta_save = array_merge( $old, $save );
+//            } else {
+//                $meta_save = $save;
+//	    }
+//            foreach( $meta_save as $meta_name => $meta_value ) {
+//                update_post_meta( $post_id,  $meta_name, $meta_value );
+//            }
+//        }
+//    }
+
+    /**
+     * zapisuje dane z metaboxu do meta postu
+     * @global object $current_screen
+     * @param int $post_id
+     */
     public function save( $post_id ) {
-        
+
         global $current_screen;
         foreach( $this->elements as $element ) {
-            $old = get_post_meta( $post_id, $element->get_name(), true );
+
             $save[$element->get_name()] = $this->get_input_data( $element->get_name() );
-            
+
             $_SESSION['p_'.$post_id][$element->get_name()] = $save[$element->get_name()];
+
             if ( isset( $current_screen ) && $current_screen->action != 'add' && $element->get_validator() ) {
                 $error = $this->is_error( $element, $save );
             }
+	    if( isset( $error ) ) {
+
+		$old = get_post_meta( $post_id, $element->get_name(), true );
+
+		if ( isset( $old ) &&  is_array( $old ) ) {
+		    $meta_save[$element->get_name()] = array_merge( $save[$element->get_name()], $old );
+		} else {
+		    $meta_save[$element->get_name()] = $save[$element->get_name()];
+		}
+	    } else {
+
+		$meta_save[$element->get_name()] = $save[$element->get_name()];
+	    }
+	    //$meta_save[$element->get_name()] = $element->prepare_save_data();
         }
 
+	
+
         if( !isset( $error ) ) {
-            if ( isset( $old ) &&  is_array( $old ) ) {
-                $meta_save = array_merge( $old, $save );
-            } else {
-                $meta_save = $save;
-	    }
             foreach( $meta_save as $meta_name => $meta_value ) {
                 update_post_meta( $post_id,  $meta_name, $meta_value );
             }
         }
     }
-    
+
     /**
      * wykonuje walidacje i ustawia w sesji error jesli validacja nie poprawna
      * @param object $element
