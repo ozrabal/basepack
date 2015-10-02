@@ -222,14 +222,13 @@ function renumber_helper(index,element) {
 
 
 jQuery('.ui-sortable-container').sortable({
-	opacity: 0.6,
-	revert: false,
+	opacity: 0.8,
+	revert: true,
+	axis: "y",
 	cursor: 'move',
 	handle: '.order',
-        update: function(event,ui){ renumber(ui.item); }
-//        update: function (event, ui) {
-//        updateNames(jQuery(this))
-//    }
+	placeholder: "ui-state-highlight",
+	update: function(event,ui){ renumber(ui.item); }
 });
 
 

@@ -13,9 +13,13 @@ color: #888888;
 }
 
 .sortable-item, .sortable-item-placeholder {
-    height: 80px;
+   zheight: 85px;
 
 }
+.ul-sortable-placeholder{
+    height: 85px;
+}
+
 .map-box {
   height: 300px;
   border: 1px solid #000;
@@ -86,8 +90,9 @@ td.order{
 
 }
 tr.inline-edit-row.repeatable-item td{
-    border-bottom: 4px solid #eeeeee;
+    border-bottom: 1px solid #e6e6e6;
     padding-bottom: 5px;
+    padding-top: 5px;
 }
 .pwp-metabox tr{
     zborder-bottom: 1px solid #eeeeee;
@@ -95,14 +100,22 @@ tr.inline-edit-row.repeatable-item td{
     box-shadow: 0 1px 0px rgba(0, 0, 0, 0.04);
 }
 td.order:hover, .drag{
-    background-color: #eeeeee;
+    background-color: #00A0D2;
+    color: #fff;
 
 }
 td.order, td.remove{
     width: 20px;
 }
-.repeatable-add.button {
+
+.wp-core-ui  .repeatable-add.button {
     margin-top: 5px;
+}
+.repeatable .inline-edit-row h4.repeater-title {
+    padding: 0px;
+    margin: .1em 0px .1em 0;
+   
+    font-size: 0.8em;
 }
 input:disabled.disabled-noframe, textarea.disabled.disabled-noframe {
     background-color: #eeeeee;
@@ -112,7 +125,33 @@ input:disabled.disabled-noframe, textarea.disabled.disabled-noframe {
     color: inherit;
 
 }
+.repeatable-remove:hover{
+    color: #A00;
+}
+.repeatable .ui-sortable-helper{
+    border: 1px dashed #444;
+    padding-bottom: 5px;
+}
+.ui-sortable-container .ui-sortable-placeholder{
+    //background-color: #444;
+    border: 1px dashed #444;
+    display: block;
+}
+.striped > tbody > :nth-child(2n){
+     background-color: #F2F2F2;
+}
+tr.ui-state-highlight,
+.striped > tbody > .ui-state-highlight{
+    xheight: 1.5em;
+    xline-height: 1.2em;
+    background-color: #00A0D2 !important;
+    
+    zdisplay: block;
+}
 
+.repeatable-element {
+    margin-bottom: 5px;
+}
 .pwp-metabox .wp-picker-container,
 .pwp-metabox .wp-picker-container:active {
 margin: 0 10px;

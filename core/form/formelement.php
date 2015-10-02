@@ -194,7 +194,7 @@ abstract class Formelement{
         if( isset( $this->title ) ) {
             return sprintf( $tag, $this->title );
 	}else if( isset( $this->label ) ) {
-	    return sprintf( $tag, $this->get_label() );
+	    return sprintf( $tag, $this->label );
 	}else{
 	    return sprintf( $tag, $this->get_name() );
 	}

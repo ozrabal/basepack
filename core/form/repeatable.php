@@ -23,6 +23,31 @@ class Repeatable extends Formelement {
     }
 
     /**
+     * ustawia tekst buttona dodawania pola
+     * @param string $title
+     * @return \Formelement
+     */
+    public function set_plus_label( $plus_label ) {
+
+        $this->plus_label = $plus_label;
+        return $this;
+    }
+
+    /**
+     * zwraca buttona dodawania pola i dekoruje tagami html
+     * @param string $tag
+     * @return string
+     */
+    public function get_plus_label( $tag = '%s' ) {
+
+        if( isset( $this->plus_label ) ) {
+            return sprintf( $tag, $this->plus_label );
+	}else{
+	    return sprintf( $tag, __( 'Item', 'pwp') );
+	}
+    }
+
+    /**
      * dolacza skrypty js
      */
     private function enqueue_media_repeatable() {
@@ -105,7 +130,7 @@ class Repeatable extends Formelement {
 	    } else {
 		$this->render_frontend();
 	    }
-            $this->body .= '<a href="#" class="repeatable-add button"><span class="pwp-icon dashicons dashicons-plus"></span>'. __( 'Add ', 'pwp' ) . $this->get_title() . '</a>';
+            $this->body .= '<a href="#" class="repeatable-add button"><span class="pwp-icon dashicons dashicons-plus"></span>'. __( 'Add ', 'pwp' ) . $this->get_plus_label() . '</a>';
 	} else {
             $this->body = '<div class="pwp-error"><p class="description">' . __( 'No declaration field: ', 'pwp') . $this->get_title() . '</p></div>';
         }
@@ -132,7 +157,7 @@ class Repeatable extends Formelement {
 	    if( isset( $value[$index][$name] ) ) {
 		$element->set_value( $value[$index][$name] );
             }
-            $this->body .= $element->render();
+            $this->body .= '<div class="repeatable-element">' . $element->render() . '</div>';
             $element->set_name( $name );
         }
     }
@@ -142,11 +167,11 @@ class Repeatable extends Formelement {
      */
     private function render_backend() {
 
-	$this->body .= '<table class="meta ds-input-table repeatable"><tbody class="ui-sortable-container">';
+	$this->body .= '<table class="meta ds-input-table striped repeatable"><tbody class="ui-sortable-container">';
 	$value = $this->get_value();
 	for( $index = 0; $index < count( $value ); $index++ ) {
-	    $this->body .= '<tr class="row sortable-item repeatable-item inline-edit-row quick-edit-row alternate"><td class="order"><div class="dashicons dashicons-menu"></div></td><td>';
-	    $this->body .= $this->get_title( '<h4>%s</h4>' );
+	    $this->body .= '<tr class="row sortable-item repeatable-item inline-edit-row quick-edit-row "><td class="order"><div class="dashicons dashicons-menu"></div></td><td>';
+	    $this->body .= $this->get_title( '<h4 class="repeater-title">%s</h4>' );
             $this->render_repeatable_element( $value, $index );
 	    $this->body .= '</td><td class="remove"><a class="repeatable-remove dashicons dashicons-no" href="#"></a></td></tr>';
 	    $this->body .= $this->get_after();
