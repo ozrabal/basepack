@@ -314,31 +314,31 @@ class Test {
 //		) );
 //
 //add_shortcode( 'bartag', array($this, 'bartag_func') );
-//add_action('media_buttons',  array($this ,'add_my_media_button'));
+add_action('media_buttons',  array($this ,'add_my_media_button'));
 
 
-//add_action( 'admin_footer-post-new.php',array( $this,'add_templates' ) );
-//add_action( 'admin_footer-post.php',array(  $this,  'add_templates' ) );
+add_action( 'admin_footer-post-new.php',array( $this,'add_templates' ) );
+add_action( 'admin_footer-post.php',array(  $this,  'add_templates' ) );
 
     }
 //
-//public function add_templates() {
-//		include 'template-data.php';
-//		include 'edit-form.php';
-//	}
-//
-//
-//   public function add_my_media_button() {
-//       dump(__METHOD__);
-//    echo '<a href="#" id="modal" class="button">Modal</a>';
-//}
-//
-//    	public function bartag_func( $atts ) {
-//    $a = shortcode_atts( array(
-//        'foo' => 'something',
-//        'bar' => 'something else',
-//    ), $atts );
-//
-//    return "foo = {$a['foo']}";
-//}
+public function add_templates() {
+		include 'template-data.php';
+		include 'edit-form.php';
+	}
+
+
+   public function add_my_media_button() {
+       //dump(__METHOD__);
+    echo '<a href="#" id="modal" class="button">Modal</a>';
+}
+
+    	public function bartag_func( $atts ) {
+    $a = shortcode_atts( array(
+        'foo' => 'something',
+        'bar' => 'something else',
+    ), $atts );
+
+    return "foo = {$a['foo']}";
+}
 }

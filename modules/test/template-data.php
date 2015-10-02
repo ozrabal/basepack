@@ -30,6 +30,21 @@
 			<section class="backbone_modal-main" role="main">
 				<header><h1><?php echo __( 'Backbone Modal', 'backbone_modal' ); ?></h1></header>
 				<article>{{ data.a }}</article>
+				
+<?php
+
+//echo "<div style='clear:both; display:block;'></div><input name='edited_post_id' value=".$_GET['subedit'].">";
+
+dump(get_post(20));
+
+ $settings = array(         'textarea_rows' =>
+20,     );
+    //wp_editor( 'Lorem ipsum','wpeditor', $settings );
+wp_enqueue_media();
+
+
+	?>
+
 				<button id="b">shortcode</button>
 				<footer>
 					<div class="inner text-right">

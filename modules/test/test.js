@@ -38,15 +38,15 @@ aut0poietic.backbone_modal.Application = Backbone.View.extend(
 			"click #btn-cancel": "closeModal",
 			"click #btn-ok": "saveModal",
 			"click .navigation-bar a": "doNothing",
-			'click #b': 'Sload',
+			'click #b': 'load',
 			'click #do': 'insert'
 		},
 
-		Sload: function(e){
+		load: function(e){
 		    "use strict";
 
 			e.preventDefault();
-		    //alert(this);
+		    alert(this);
 //this.templates.window = wp.template( "aut0poietic-modal-window" );
 			//this.ui.content = wp.template( "shortcode-default-edit-form" );
 		    //this.render();
@@ -86,7 +86,7 @@ e.preventDefault();
 		initialize: function () {
 			"use strict";
 
-			_.bindAll( this, 'render', 'preserveFocus', 'closeModal', 'saveModal', 'doNothing', 'Sload', 'insert' );
+			_.bindAll( this, 'render', 'preserveFocus', 'closeModal', 'saveModal', 'doNothing', 'load', 'insert' );
 			this.initialize_templates();
 
 
