@@ -331,6 +331,15 @@ public function add_templates() {
    public function add_my_media_button() {
        //dump(__METHOD__);
     echo '<a href="#" id="modal" class="button">Modal</a>';
+
+  ?>
+
+<a href="http://local.wordpress.dev/wp-admin/post.php?post=1&action=edit&TB_iframe=true&action=p#TB_inline" class="thickbox">Modal Me</a>
+
+
+<?php
+
+
 }
 
     	public function bartag_func( $atts ) {

@@ -29,6 +29,10 @@
 			</div>
 			<section class="backbone_modal-main" role="main">
 				<header><h1><?php echo __( 'Backbone Modal', 'backbone_modal' ); ?></h1></header>
+<<<<<<< HEAD
+				<?php wp_editor('content', 'editorid'); ?>
+                <article>{{ data.a }}</article>
+=======
 				<article>{{ data.a }}</article>
 				
 <?php
@@ -45,6 +49,10 @@ wp_enqueue_media();
 
 	?>
 
+<<<<<<< Updated upstream
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 				<button id="b">shortcode</button>
 				<footer>
 					<div class="inner text-right">
