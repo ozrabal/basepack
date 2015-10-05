@@ -369,28 +369,314 @@ public function post_edit(){
     
     ?>
 
-<html <?php language_attributes(); ?> class="no-js">
-<head>
 
 
 
 <?php
 
 //wp_enqueue_script('editor');
+        iframe_header();
+//print_head_scripts();
+//print_admin_styles();
+//do_action( 'admin_head' );
+        $post = get_post(20);
+        $post_type = 'post';
+        //include_once 'wp-admin/edit-form-advanced.php';
+      ?> 
 
-print_head_scripts();
-print_admin_styles();
-do_action( 'admin_head' );
+<div class="wrap">
+<h1><?php
+echo esc_html( $title );
+if ( isset( $post_new_file ) && current_user_can( $post_type_object->cap->create_posts ) )
+	echo ' <a href="' . esc_url( admin_url( $post_new_file ) ) . '" class="page-title-action">' . esc_html( $post_type_object->labels->add_new ) . '</a>';
+?></h1>
+<?php if ( $notice ) : ?>
+<div id="notice" class="notice notice-warning"><p id="has-newer-autosave"><?php echo $notice ?></p></div>
+<?php endif; ?>
+<?php if ( $message ) : ?>
+<div id="message" class="updated notice notice-success is-dismissible"><p><?php echo $message; ?></p></div>
+<?php endif; ?>
+<div id="lost-connection-notice" class="error hidden">
+	<p><span class="spinner"></span> <?php _e( '<strong>Connection lost.</strong> Saving has been disabled until you&#8217;re reconnected.' ); ?>
+	<span class="hide-if-no-sessionstorage"><?php _e( 'We&#8217;re backing up this post in your browser, just in case.' ); ?></span>
+	</p>
+</div>
+<form name="post" action="post.php" method="post" id="post"<?php
+/**
+ * Fires inside the post editor form tag.
+ *
+ * @since 3.0.0
+ *
+ * @param WP_Post $post Post object.
+ */
+do_action( 'post_edit_form_tag', $post );
+
+$referer = wp_get_referer();
+?>>
+<?php wp_nonce_field($nonce_action); ?>
+<input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
+<input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $form_action ) ?>" />
+<input type="hidden" id="originalaction" name="originalaction" value="<?php echo esc_attr( $form_action ) ?>" />
+<input type="hidden" id="post_author" name="post_author" value="<?php echo esc_attr( $post->post_author ); ?>" />
+<input type="hidden" id="post_type" name="post_type" value="<?php echo esc_attr( $post_type ) ?>" />
+<input type="hidden" id="original_post_status" name="original_post_status" value="<?php echo esc_attr( $post->post_status) ?>" />
+<input type="hidden" id="referredby" name="referredby" value="<?php echo $referer ? esc_url( $referer ) : ''; ?>" />
+<?php if ( ! empty( $active_post_lock ) ) { ?>
+<input type="hidden" id="active_post_lock" value="<?php echo esc_attr( implode( ':', $active_post_lock ) ); ?>" />
+<?php
+}
+if ( 'draft' != get_post_status( $post ) )
+	wp_original_referer_field(true, 'previous');
+
+echo $form_extra;
+
+wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
+wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
 ?>
-    </head>
 
-<body>
-<?php wp_editor('sss', 'ddd'); ?>
+<?php
+/**
+ * Fires at the beginning of the edit form.
+ *
+ * At this point, the required hidden fields and nonces have already been output.
+ *
+ * @since 3.7.0
+ *
+ * @param WP_Post $post Post object.
+ */
+do_action( 'edit_form_top', $post ); ?>
 
-    <?php print_footer_scripts(); ?>
+<div id="poststuff">
+<div id="post-body" class="metabox-holder columns-2">
+<div id="post-body-content">
 
-</body>
-</html>
+<?php if ( post_type_supports($post_type, 'title') ) { ?>
+<div id="titlediv">
+<div id="titlewrap">
+	<?php
+	/**
+	 * Filter the title field placeholder text.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param string  $text Placeholder text. Default 'Enter title here'.
+	 * @param WP_Post $post Post object.
+	 */
+	$title_placeholder = apply_filters( 'enter_title_here', __( 'Enter title here' ), $post );
+	?>
+	<label class="screen-reader-text" id="title-prompt-text" for="title"><?php echo $title_placeholder; ?></label>
+	<input type="text" name="post_title" size="30" value="<?php echo esc_attr( $post->post_title ); ?>" id="title" spellcheck="true" autocomplete="off" />
+</div>
+<?php
+/**
+ * Fires before the permalink field in the edit form.
+ *
+ * @since 4.1.0
+ *
+ * @param WP_Post $post Post object.
+ */
+do_action( 'edit_form_before_permalink', $post );
+?>
+<div class="inside">
+<?php
+$sample_permalink_html = $post_type_object->public ? get_sample_permalink_html($post->ID) : '';
+$shortlink = wp_get_shortlink($post->ID, 'post');
+
+if ( !empty( $shortlink ) && $shortlink !== $permalink && $permalink !== home_url('?page_id=' . $post->ID) )
+    $sample_permalink_html .= '<input id="shortlink" type="hidden" value="' . esc_attr($shortlink) . '" /><a href="#" class="button button-small" onclick="prompt(&#39;URL:&#39;, jQuery(\'#shortlink\').val()); return false;">' . __('Get Shortlink') . '</a>';
+
+if ( $post_type_object->public && ! ( 'pending' == get_post_status( $post ) && !current_user_can( $post_type_object->cap->publish_posts ) ) ) {
+	$has_sample_permalink = $sample_permalink_html && 'auto-draft' != $post->post_status;
+?>
+	<div id="edit-slug-box" class="hide-if-no-js">
+	<?php
+		if ( $has_sample_permalink )
+			echo $sample_permalink_html;
+	?>
+	</div>
+<?php
+}
+?>
+</div>
+<?php
+wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
+?>
+</div><!-- /titlediv -->
+<?php
+}
+/**
+ * Fires after the title field.
+ *
+ * @since 3.5.0
+ *
+ * @param WP_Post $post Post object.
+ */
+do_action( 'edit_form_after_title', $post );
+
+if ( post_type_supports($post_type, 'editor') ) {
+?>
+<div id="postdivrich" class="postarea<?php if ( $_wp_editor_expand ) { echo ' wp-editor-expand'; } ?>">
+
+<?php wp_editor( $post->post_content, 'content', array(
+	'_content_editor_dfw' => $_content_editor_dfw,
+	'drag_drop_upload' => true,
+	'tabfocus_elements' => 'content-html,save-post',
+	'editor_height' => 300,
+	'tinymce' => array(
+		'resize' => false,
+		'wp_autoresize_on' => $_wp_editor_expand,
+		'add_unload_trigger' => false,
+	),
+) ); ?>
+<table id="post-status-info"><tbody><tr>
+	<td id="wp-word-count"><?php printf( __( 'Word count: %s' ), '<span class="word-count">0</span>' ); ?></td>
+	<td class="autosave-info">
+	<span class="autosave-message">&nbsp;</span>
+<?php
+	if ( 'auto-draft' != $post->post_status ) {
+		echo '<span id="last-edit">';
+		if ( $last_user = get_userdata( get_post_meta( $post_ID, '_edit_last', true ) ) ) {
+			printf(__('Last edited by %1$s on %2$s at %3$s'), esc_html( $last_user->display_name ), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
+		} else {
+			printf(__('Last edited on %1$s at %2$s'), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
+		}
+		echo '</span>';
+	} ?>
+	</td>
+	<td id="content-resize-handle" class="hide-if-no-js"><br /></td>
+</tr></tbody></table>
+
+</div>
+<?php }
+/**
+ * Fires after the content editor.
+ *
+ * @since 3.5.0
+ *
+ * @param WP_Post $post Post object.
+ */
+do_action( 'edit_form_after_editor', $post );
+?>
+</div><!-- /post-body-content -->
+
+<div id="postbox-container-1" class="postbox-container">
+<?php
+	//post_submit_meta_box($post);
+if ( 'page' == $post_type ) {
+	/**
+	 * Fires before meta boxes with 'side' context are output for the 'page' post type.
+	 *
+	 * The submitpage box is a meta box with 'side' context, so this hook fires just before it is output.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param WP_Post $post Post object.
+	 */
+	do_action( 'submitpage_box', $post );
+}
+else {
+	/**
+	 * Fires before meta boxes with 'side' context are output for all post types other than 'page'.
+	 *
+	 * The submitpost box is a meta box with 'side' context, so this hook fires just before it is output.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param WP_Post $post Post object.
+	 */
+	do_action( 'submitpost_box', $post );
+}
+
+
+do_meta_boxes($post_type, 'side', $post);
+
+?>
+</div>
+<div id="postbox-container-2" class="postbox-container">
+<?php
+
+do_meta_boxes(null, 'normal', $post);
+
+if ( 'page' == $post_type ) {
+	/**
+	 * Fires after 'normal' context meta boxes have been output for the 'page' post type.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param WP_Post $post Post object.
+	 */
+	do_action( 'edit_page_form', $post );
+}
+else {
+	/**
+	 * Fires after 'normal' context meta boxes have been output for all post types other than 'page'.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param WP_Post $post Post object.
+	 */
+	do_action( 'edit_form_advanced', $post );
+}
+
+
+do_meta_boxes(null, 'advanced', $post);
+
+?>
+</div>
+<?php
+/**
+ * Fires after all meta box sections have been output, before the closing #post-body div.
+ *
+ * @since 2.1.0
+ *
+ * @param WP_Post $post Post object.
+ */
+do_action( 'dbx_post_sidebar', $post );
+
+?>
+</div><!-- /post-body -->
+<br class="clear" />
+</div><!-- /poststuff -->
+</form>
+</div>
+
+?>
+
+
+<form id="post" class="post-edit front-end-form" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" name="post_id" value="<?php the_ID(); ?>" />
+    <?php wp_nonce_field( 'update_post_'. get_the_ID(), 'update_post_nonce' ); ?>
+
+    <p><label for="post_title">Title</label>
+    <input type="text" id="post_title" name="post_title" value="<?php echo $post->post_title; ?>" /></p>
+
+    <p><?php wp_editor( $post->post_content, 'postcontent' ); ?></p>
+
+    <p><label for="post_title">Test</label>
+    <?php $value = get_post_meta(get_the_ID(), 'edit_test', true); ?>
+    <input type="text" id="edit_test" name="edit_test" value="<?php echo $value; ?>" /></p>
+
+    <p><label for="post_title">Test 2</label>
+    <?php $value = get_post_meta(get_the_ID(), 'edit_test2', true); ?>
+    <input type="text" id="edit_test2" name="edit_test2" value="<?php echo $value; ?>" /></p>
+
+    <input type="submit" id="submit" value="Update" />
+
+</form>
+
+
+
+
+    <?php
+    
+//do_action('edit_page_form');
+
+iframe_footer();
+
+//print_footer_scripts(); ?>
+
+
 	<?php
     die();
 }
