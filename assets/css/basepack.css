@@ -2,68 +2,60 @@
     Created on : 2014-02-09, 22:28:45
     Author     : piotr
 */
-.this{
+.this {
     border: 1px solid #DD3D36 !important;
     background: #DD3D36;
 }
-.pwp-icon{
-
+.pwp-icon {
     vertical-align: middle;
-color: #888888;
+    color: #888888;
 }
-
-.sortable-item, .sortable-item-placeholder {
-   zheight: 85px;
-
-}
-.ul-sortable-placeholder{
+.ul-sortable-placeholder {
     height: 85px;
 }
-
 .map-box {
   height: 300px;
   border: 1px solid #000;
 }
-.box{
+.box {
     display: block;
     width: 100%;
     margin-bottom: 10px;
 }
-input.error, input.pwp-error, div.pwp-error, textarea.pwp-error{
+input.error,
+input.pwp-error,
+div.pwp-error,
+textarea.pwp-error {
     background: none repeat scroll 0 0 #ffefef;
     border-left: 4px solid #DD3D36;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
-.pwp-error{
+.pwp-error {
     padding-left: 10px;
 }
-span.error{
+span.error {
     display: block;
     color: #DD3D36;
 }
-.block{
+.block {
     display: block;
 }
-
-
-.attachment-fieldset{
+.attachment-fieldset {
     margin: 10px 0;
 }
-.field-box{
+.field-box {
     margin-top: 5px;
 }
-
-.attachment-preview .thumbnail{
+.attachment-preview .thumbnail {
      overflow: hidden;
 }
-.field-box .attachment-fieldset .attachment-preview,.field-box .attachment-preview .thumbnail {
+.field-box .attachment-fieldset .attachment-preview,
+.field-box .attachment-preview .thumbnail {
     height: 110px;
     width: 110px;
     overflow: hidden;
 }
-.attachment-preview .thumbnail img{
-    smargin: 0 auto;
-
+.attachment-preview .thumbnail img {
     width: auto;
     max-height: 110px;
 }
@@ -78,87 +70,78 @@ span.error{
 .attachment-preview .thumbnail .centered img {
     transform: translate(-50%, -50%);
 }
-
-.disable, .disable:hover, .disable:active, .disable:focus{
+.disable,
+.disable:hover,
+.disable:active,
+.disable:focus {
     color: #dddddd;
 }
-table.repeatable{
+table.repeatable {
     width: 100%;
 }
-td.order{
+td.order {
     cursor: move;
-
 }
-tr.inline-edit-row.repeatable-item td{
+tr.inline-edit-row.repeatable-item td {
     border-bottom: 1px solid #e6e6e6;
     padding-bottom: 5px;
     padding-top: 5px;
 }
-.pwp-metabox tr{
-    zborder-bottom: 1px solid #eeeeee;
-    aborder: 1px solid #E5E5E5;
+.pwp-metabox tr {
     box-shadow: 0 1px 0px rgba(0, 0, 0, 0.04);
 }
-td.order:hover, .drag{
+td.order:hover,
+.drag {
     background-color: #00A0D2;
     color: #fff;
-
 }
-td.order, td.remove{
+td.order,
+td.remove {
     width: 20px;
 }
-
 .wp-core-ui  .repeatable-add.button {
     margin-top: 5px;
 }
 .repeatable .inline-edit-row h4.repeater-title {
     padding: 0px;
     margin: .1em 0px .1em 0;
-   
     font-size: 0.8em;
 }
-input:disabled.disabled-noframe, textarea.disabled.disabled-noframe {
+input:disabled.disabled-noframe,
+textarea.disabled.disabled-noframe {
     background-color: #eeeeee;
     border-color: transparent;
-     border-left: 4px solid #dddddd;
+    border-left: 4px solid #dddddd;
     box-shadow: 0 0 0 0 ;
     color: inherit;
-
 }
-.repeatable-remove:hover{
+.repeatable-remove:hover {
     color: #A00;
 }
-.repeatable .ui-sortable-helper{
+.repeatable .ui-sortable-helper {
     border: 1px dashed #444;
     padding-bottom: 5px;
 }
-.ui-sortable-container .ui-sortable-placeholder{
-    //background-color: #444;
+.ui-sortable-container .ui-sortable-placeholder {
     border: 1px dashed #444;
     display: block;
 }
-.striped > tbody > :nth-child(2n){
+.striped > tbody > :nth-child(2n) {
      background-color: #F2F2F2;
 }
 tr.ui-state-highlight,
-.striped > tbody > .ui-state-highlight{
-    xheight: 1.5em;
-    xline-height: 1.2em;
+.striped > tbody > .ui-state-highlight {
     background-color: #00A0D2 !important;
-    
-    zdisplay: block;
 }
-
 .repeatable-element {
     margin-bottom: 5px;
 }
 .pwp-metabox .wp-picker-container,
 .pwp-metabox .wp-picker-container:active {
-margin: 0 10px;
-   line-height: 35px;
+    margin: 0 10px;
+    line-height: 35px;
 }
 .wp-core-ui .pwp-metabox  .button-group.button-small .button.wp-picker-clear,
 .wp-core-ui .pwp-metabox  .button.button-small.wp-picker-clear {
-
     margin: 5px;
 }

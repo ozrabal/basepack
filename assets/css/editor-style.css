@@ -1,0 +1,14 @@
+.wpview-wrap{
+    border: 3px dashed #F2F2F2;
+}
+.shortcode-tinymce-box {
+    padding: 10px;
+    text-align: center
+}
+.shortcode-tinymce-box .dashicons{
+    margin: 0 auto;
+    display: block;
+    width: 20px;
+    height: 50px;
+    font-size: 45px;
+}
