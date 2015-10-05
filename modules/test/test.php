@@ -5,13 +5,17 @@ namespace Modules\Test;
 class Test {
 
     public function __construct() {
-	
+	$this->ajax_edit();
 	add_action( 'admin_enqueue_scripts', function(){
 	    wp_enqueue_script( 'test', BASEPACK_PLUGIN_URL . 'modules/test/test.js', array( 'jquery',
 				'backbone',
 				'underscore',
 				'wp-util' ), true, true );
 	    wp_enqueue_style( 'test', BASEPACK_PLUGIN_URL . 'modules/test/modal.css' );
+
+	   
+
+
 	});
 	
 
@@ -330,11 +334,14 @@ public function add_templates() {
 
    public function add_my_media_button() {
        //dump(__METHOD__);
-    echo '<a href="#" id="modal" class="button">Modal</a>';
+    //echo '<a href="#" id="modal" class="button">Modal</a>';
 
   ?>
+<a href="<?php site_url() ?>/wp-admin/post.php?post=1&action=edit&TB_iframe=true&action=p#TB_inline" class="thickbox">Modal Me</a>
 
-<a href="http://local.wordpress.dev/wp-admin/post.php?post=1&action=edit&TB_iframe=true&action=p#TB_inline" class="thickbox">Modal Me</a>
+
+
+<a href="<?php site_url() ?>admin-ajax.php?post=1&action=pedit&TB_iframe=true" class="thickbox">ajax</a>
 
 
 <?php
@@ -350,4 +357,43 @@ public function add_templates() {
 
     return "foo = {$a['foo']}";
 }
+
+
+
+public function ajax_edit(){
+    add_action('wp_ajax_pedit', array($this, 'post_edit'));
+    add_action('wp_ajax_nopriv_pedit', array($this, 'post_edit'));
+}
+
+public function post_edit(){
+    
+    ?>
+
+<html <?php language_attributes(); ?> class="no-js">
+<head>
+
+
+
+<?php
+
+//wp_enqueue_script('editor');
+
+print_head_scripts();
+print_admin_styles();
+do_action( 'admin_head' );
+?>
+    </head>
+
+<body>
+<?php wp_editor('sss', 'ddd'); ?>
+
+    <?php print_footer_scripts(); ?>
+
+</body>
+</html>
+	<?php
+    die();
+}
+
+
 }
