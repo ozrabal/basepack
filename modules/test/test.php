@@ -321,15 +321,15 @@ class Test {
 add_action('media_buttons',  array($this ,'add_my_media_button'));
 
 
-add_action( 'admin_footer-post-new.php',array( $this,'add_templates' ) );
-add_action( 'admin_footer-post.php',array(  $this,  'add_templates' ) );
+//add_action( 'admin_footer-post-new.php',array( $this,'add_templates' ) );
+//add_action( 'admin_footer-post.php',array(  $this,  'add_templates' ) );
 
     }
 //
 public function add_templates() {
-		include 'template-data.php';
-		include 'edit-form.php';
-	}
+    include 'template-data.php';
+    include 'edit-form.php';
+}
 
 
    public function add_my_media_button() {
@@ -361,12 +361,105 @@ public function add_templates() {
 
 
 public function ajax_edit(){
+
+
+
     add_action('wp_ajax_pedit', array($this, 'post_edit'));
     add_action('wp_ajax_nopriv_pedit', array($this, 'post_edit'));
+
+
+    //add_action('save_post', array($this,'save_my_post_type'));
+
+
+//add_action('admin_head', array($this,'my_post_type_xhr'));
+//add_action('admin_head-post-new.php', array($this,'my_post_type_xhr'));
+
+
+    add_filter('redirect_post_location', function($location)
+{
+    global $post;
+
+    return $referer = wp_get_referer();
+//    dump($referer);
+//    die();
+//    if (
+//        (isset($_POST['publish']) || isset($_POST['save'])) &&
+//        preg_match("/post=([0-9]*)/", $location, $match) &&
+//        $post &&
+//        $post->ID == $match[1] &&
+//        (isset($_POST['publish']) || $post->post_status == 'publish') && // Publishing draft or updating published post
+//        $pl = get_permalink($post->ID)
+//    ) {
+//        // Always redirect to the post
+//        $location = $pl;
+//    }
+//    return $location;
+});
+
+
 }
 
+
+
+public function my_post_type_xhr(){
+    global $post;
+    if('post' === $post->post_type){
+        $post_url = admin_url('post.php'); #In case we're on post-new.php
+        echo "
+        <script>
+            jQuery(document).ready(function($){
+                //Click handler - you might have to bind this click event another way
+                $('input#publish, input#save-post').click(function(){
+                    //Post to post.php
+                    var postURL = '$post_url';
+
+                    //Collate all post form data
+                    var data = $('form#post').serializeArray();
+
+                    //Set a trigger for our save_post action
+                    data.push({foo_doing_ajax: true});
+
+                    //The XHR Goodness
+                    $.post(postURL, data, function(response){
+                        var obj = $.parseJSON(response);
+                        if(obj.success)
+                            alert('Successfully saved post!');
+                        else
+                            alert('Something went wrong. ' + response);
+                    });
+                    return false;
+                });
+            });
+        </script>";
+    }
+}
+
+
+
+public function save_my_post_type($post_id){
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+
+    #If this is your post type
+    if('post' === $_POST['post_type']){
+        //Save any post meta here
+
+        #We conditionally exit so we don't return the full wp-admin load if foo_doing_ajax is true
+        if(isset($_POST['foo_doing_ajax']) && $_POST['foo_doing_ajax'] === true){
+            header('Content-type: application/json');
+            #Send a response
+            echo json_encode(array('success' => true));
+            exit;
+            #You should keep this conditional to degrade gracefully for no JS
+        }
+    }
+}
 public function post_edit(){
 
+
+ $post = get_post(20);
+        $post_type = 'post';
+
+$post_ID = $post->ID;
 add_thickbox();
 	wp_enqueue_media( array( 'post' => $post_ID ) );
     
@@ -379,8 +472,7 @@ wp_enqueue_script('editor');
 //do_action( 'admin_head' );
 	//global $post_type, $post_type_object, $post;
 wp_enqueue_script('post');
-        $post = get_post(20);
-        $post_type = 'post';
+       
 
 	set_current_screen('post');
 
