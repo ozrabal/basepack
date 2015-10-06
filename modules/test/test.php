@@ -337,11 +337,11 @@ public function add_templates() {
     //echo '<a href="#" id="modal" class="button">Modal</a>';
 
   ?>
-<a href="<?php site_url() ?>/wp-admin/post.php?post=1&action=edit&TB_iframe=true&action=p#TB_inline" class="thickbox">Modal Me</a>
+<a href="<?php site_url() ?>/wp-admin/post.php?post=1&action=edit&TB_iframe=true&action=p#TB_inline" class="thickbox"></a>
 
 
 
-<a href="<?php site_url() ?>admin-ajax.php?post=1&action=pedit&TB_iframe=true" class="thickbox">ajax</a>
+<a href="<?php site_url() ?>admin-ajax.php?post=1&width=auto&action=pedit&TB_iframe=true" class="thickbox button">Thickbox ajax</a>
 
 
 <?php
@@ -366,52 +366,204 @@ public function ajax_edit(){
 }
 
 public function post_edit(){
+
+add_thickbox();
+	wp_enqueue_media( array( 'post' => $post_ID ) );
     
-    ?>
 
 
-
-
-<?php
-
-//wp_enqueue_script('editor');
+wp_enqueue_script('editor');
         iframe_header();
 //print_head_scripts();
 //print_admin_styles();
 //do_action( 'admin_head' );
+	//global $post_type, $post_type_object, $post;
+wp_enqueue_script('post');
         $post = get_post(20);
         $post_type = 'post';
-        //include_once 'wp-admin/edit-form-advanced.php';
-      ?> 
 
-<div class="wrap">
-<h1><?php
-echo esc_html( $title );
-if ( isset( $post_new_file ) && current_user_can( $post_type_object->cap->create_posts ) )
-	echo ' <a href="' . esc_url( admin_url( $post_new_file ) ) . '" class="page-title-action">' . esc_html( $post_type_object->labels->add_new ) . '</a>';
-?></h1>
-<?php if ( $notice ) : ?>
-<div id="notice" class="notice notice-warning"><p id="has-newer-autosave"><?php echo $notice ?></p></div>
-<?php endif; ?>
-<?php if ( $message ) : ?>
-<div id="message" class="updated notice notice-success is-dismissible"><p><?php echo $message; ?></p></div>
-<?php endif; ?>
-<div id="lost-connection-notice" class="error hidden">
-	<p><span class="spinner"></span> <?php _e( '<strong>Connection lost.</strong> Saving has been disabled until you&#8217;re reconnected.' ); ?>
-	<span class="hide-if-no-sessionstorage"><?php _e( 'We&#8217;re backing up this post in your browser, just in case.' ); ?></span>
-	</p>
-</div>
-<form name="post" action="post.php" method="post" id="post"<?php
+	set_current_screen('post');
+
+$is_IE = false;
+
+
+
+
+
+if ( post_type_supports( $post_type, 'editor' ) && ! wp_is_mobile() &&
+	 ! ( $is_IE && preg_match( '/MSIE [5678]/', $_SERVER['HTTP_USER_AGENT'] ) ) &&
+	 apply_filters( 'wp_editor_expand', true, $post_type ) ) {
+
+	wp_enqueue_script('editor-expand');
+	$_content_editor_dfw = true;
+	$_wp_editor_expand = ( get_user_setting( 'editor_expand', 'on' ) === 'on' );
+}
+
+if ( wp_is_mobile() )
+	wp_enqueue_script( 'jquery-touch-punch' );
+
+
+
+
+
+$post_type_object = get_post_type_object($post_type);
+
+// All meta boxes should be defined and added before the first do_meta_boxes() call (or potentially during the do_meta_boxes action).
+require_once( ABSPATH . 'wp-admin/includes/meta-boxes.php' );
+
+
+$publish_callback_args = null;
+//if ( post_type_supports($post_type, 'revisions') && 'auto-draft' != $post->post_status ) {
+//	$revisions = wp_get_post_revisions( $post_ID );
+//
+//	// We should aim to show the revisions metabox only when there are revisions.
+//	if ( count( $revisions ) > 1 ) {
+//		reset( $revisions ); // Reset pointer for key()
+//		$publish_callback_args = array( 'revisions_count' => count( $revisions ), 'revision_id' => key( $revisions ) );
+//		add_meta_box('revisionsdiv', __('Revisions'), 'post_revisions_meta_box', null, 'normal', 'core');
+//	}
+//}
+
+//if ( 'attachment' == $post_type ) {
+//	wp_enqueue_script( 'image-edit' );
+//	wp_enqueue_style( 'imgareaselect' );
+//	add_meta_box( 'submitdiv', __('Save'), 'attachment_submit_meta_box', null, 'side', 'core' );
+//	add_action( 'edit_form_after_title', 'edit_form_image_editor' );
+//
+//	if ( wp_attachment_is( 'audio', $post ) ) {
+//		add_meta_box( 'attachment-id3', __( 'Metadata' ), 'attachment_id3_data_meta_box', null, 'normal', 'core' );
+//	}
+//} else {
+//	add_meta_box( 'submitdiv', __( 'Publish' ), 'post_submit_meta_box', null, 'side', 'core', $publish_callback_args );
+//}
+
+//if ( current_theme_supports( 'post-formats' ) && post_type_supports( $post_type, 'post-formats' ) )
+//	add_meta_box( 'formatdiv', _x( 'Format', 'post format' ), 'post_format_meta_box', null, 'side', 'core' );
+
+// all taxonomies
+//foreach ( get_object_taxonomies( $post ) as $tax_name ) {
+//	$taxonomy = get_taxonomy( $tax_name );
+//	if ( ! $taxonomy->show_ui || false === $taxonomy->meta_box_cb )
+//		continue;
+//
+//	$label = $taxonomy->labels->name;
+//
+//	if ( ! is_taxonomy_hierarchical( $tax_name ) )
+//		$tax_meta_box_id = 'tagsdiv-' . $tax_name;
+//	else
+//		$tax_meta_box_id = $tax_name . 'div';
+//
+//	add_meta_box( $tax_meta_box_id, $label, $taxonomy->meta_box_cb, null, 'side', 'core', array( 'taxonomy' => $tax_name ) );
+//}
+
+//if ( post_type_supports($post_type, 'page-attributes') )
+	//add_meta_box('pageparentdiv', 'page' == $post_type ? __('Page Attributes') : __('Attributes'), 'page_attributes_meta_box', null, 'side', 'core');
+
+//if ( $thumbnail_support && current_user_can( 'upload_files' ) )
+	//add_meta_box('postimagediv', __('Featured Image'), 'post_thumbnail_meta_box', null, 'side', 'low');
+
+//if ( post_type_supports($post_type, 'excerpt') )
+//	//add_meta_box('postexcerpt', __('Excerpt'), 'post_excerpt_meta_box', null, 'normal', 'core');
+//
+//if ( post_type_supports($post_type, 'trackbacks') )
+//	//add_meta_box('trackbacksdiv', __('Send Trackbacks'), 'post_trackback_meta_box', null, 'normal', 'core');
+//
+//if ( post_type_supports($post_type, 'custom-fields') )
+	//add_meta_box('postcustom', __('Custom Fields'), 'post_custom_meta_box', null, 'normal', 'core');
+
 /**
- * Fires inside the post editor form tag.
+ * Fires in the middle of built-in meta box registration.
+ *
+ * @since 2.1.0
+ * @deprecated 3.7.0 Use 'add_meta_boxes' instead.
+ *
+ * @param WP_Post $post Post object.
+ */
+do_action( 'dbx_post_advanced', $post );
+
+//if ( post_type_supports($post_type, 'comments') )
+//	//add_meta_box('commentstatusdiv', __('Discussion'), 'post_comment_status_meta_box', null, 'normal', 'core');
+//
+//if ( ( 'publish' == get_post_status( $post ) || 'private' == get_post_status( $post ) ) && post_type_supports($post_type, 'comments') )
+//	//add_meta_box('commentsdiv', __('Comments'), 'post_comment_meta_box', null, 'normal', 'core');
+//
+//if ( ! ( 'pending' == get_post_status( $post ) && ! current_user_can( $post_type_object->cap->publish_posts ) ) )
+	//add_meta_box('slugdiv', __('Slug'), 'post_slug_meta_box', null, 'normal', 'core');
+//
+//if ( post_type_supports($post_type, 'author') ) {
+//	if ( is_super_admin() || current_user_can( $post_type_object->cap->edit_others_posts ) )
+//		add_meta_box('authordiv', __('Author'), 'post_author_meta_box', null, 'normal', 'core');
+//}
+
+/**
+ * Fires after all built-in meta boxes have been added.
+ *
+ * @since 3.0.0
+ *
+ * @param string  $post_type Post type.
+ * @param WP_Post $post      Post object.
+ */
+do_action( 'add_meta_boxes', $post_type, $post );
+
+/**
+ * Fires after all built-in meta boxes have been added, contextually for the given post type.
+ *
+ * The dynamic portion of the hook, `$post_type`, refers to the post type of the post.
  *
  * @since 3.0.0
  *
  * @param WP_Post $post Post object.
  */
-do_action( 'post_edit_form_tag', $post );
+do_action( 'add_meta_boxes_' . $post_type, $post );
+
+/**
+ * Fires after meta boxes have been added.
+ *
+ * Fires once for each of the default meta box contexts: normal, advanced, and side.
+ *
+ * @since 3.0.0
+ *
+ * @param string  $post_type Post type of the post.
+ * @param string  $context   string  Meta box context.
+ * @param WP_Post $post      Post object.
+ */
+//do_action( 'do_meta_boxes', $post_type, 'normal', $post );
+/** This action is documented in wp-admin/edit-form-advanced.php */
+do_action( 'do_meta_boxes', $post_type, 'advanced', $post );
+/** This action is documented in wp-admin/edit-form-advanced.php */
+//do_action( 'do_meta_boxes', $post_type, 'side', $post );
+
+//add_screen_option('layout_columns', array('max' => 1, 'default' => 1) );
+        //include_once 'wp-admin/edit-form-advanced.php';
+      ?> 
+
+<div class="wrap">
+
+
+<form name="post" action="post.php" method="post" id="post"<?php
+$post_ID = $post->ID;
+$notice = false;
+$form_extra = '';
+if ( 'auto-draft' == $post->post_status ) {
+	if ( 'edit' == $action )
+		$post->post_title = '';
+	$autosave = false;
+	$form_extra .= "<input type='hidden' id='auto_draft' name='auto_draft' value='1' />";
+} else {
+	$autosave = wp_get_post_autosave( $post->ID );
+}
+
+$form_action = 'editpost';
+$nonce_action = 'update-post_' . $post->ID;
 
 $referer = wp_get_referer();
+$nonce_action = 'update-post_' . $post->ID;
+
+
+
+$form_extra .= "<input type='hidden' id='post_ID' name='post_ID' value='" . esc_attr($post->ID) . "' />";
+
+
 ?>>
 <?php wp_nonce_field($nonce_action); ?>
 <input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
@@ -427,6 +579,7 @@ $referer = wp_get_referer();
 }
 if ( 'draft' != get_post_status( $post ) )
 	wp_original_referer_field(true, 'previous');
+
 
 echo $form_extra;
 
@@ -447,7 +600,7 @@ wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
 do_action( 'edit_form_top', $post ); ?>
 
 <div id="poststuff">
-<div id="post-body" class="metabox-holder columns-2">
+<div id="post-body" class="metabox-holder columns-1">
 <div id="post-body-content">
 
 <?php if ( post_type_supports($post_type, 'title') ) { ?>
@@ -477,27 +630,33 @@ do_action( 'edit_form_top', $post ); ?>
  */
 do_action( 'edit_form_before_permalink', $post );
 ?>
-<div class="inside">
-<?php
-$sample_permalink_html = $post_type_object->public ? get_sample_permalink_html($post->ID) : '';
-$shortlink = wp_get_shortlink($post->ID, 'post');
-
-if ( !empty( $shortlink ) && $shortlink !== $permalink && $permalink !== home_url('?page_id=' . $post->ID) )
-    $sample_permalink_html .= '<input id="shortlink" type="hidden" value="' . esc_attr($shortlink) . '" /><a href="#" class="button button-small" onclick="prompt(&#39;URL:&#39;, jQuery(\'#shortlink\').val()); return false;">' . __('Get Shortlink') . '</a>';
-
-if ( $post_type_object->public && ! ( 'pending' == get_post_status( $post ) && !current_user_can( $post_type_object->cap->publish_posts ) ) ) {
-	$has_sample_permalink = $sample_permalink_html && 'auto-draft' != $post->post_status;
-?>
+<!--<div class="inside">
+//<?php
+//$permalink = get_permalink( $post_ID );
+//if ( ! $permalink ) {
+//	$permalink = '';
+//}
+//$post_type_object = get_post_type_object($post_type);
+//
+//$sample_permalink_html = $post_type_object->public ? get_sample_permalink_html($post->ID) : '';
+//$shortlink = wp_get_shortlink($post->ID, 'post');
+//
+//if ( !empty( $shortlink ) && $shortlink !== $permalink && $permalink !== home_url('?page_id=' . $post->ID) )
+//    $sample_permalink_html .= '<input id="shortlink" type="hidden" value="' . esc_attr($shortlink) . '" /><a href="#" class="button button-small" onclick="prompt(&#39;URL:&#39;, jQuery(\'#shortlink\').val()); return false;">' . __('Get Shortlink') . '</a>';
+//
+//if ( $post_type_object->public && ! ( 'pending' == get_post_status( $post ) && !current_user_can( $post_type_object->cap->publish_posts ) ) ) {
+//	$has_sample_permalink = $sample_permalink_html && 'auto-draft' != $post->post_status;
+//?>
 	<div id="edit-slug-box" class="hide-if-no-js">
-	<?php
-		if ( $has_sample_permalink )
-			echo $sample_permalink_html;
-	?>
+	//<?php
+//		if ( $has_sample_permalink )
+//			echo $sample_permalink_html;
+//	?>
 	</div>
-<?php
-}
+//<?php
+//}
 ?>
-</div>
+</div>-->
 <?php
 wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
 ?>
@@ -588,7 +747,7 @@ else {
 }
 
 
-do_meta_boxes($post_type, 'side', $post);
+//do_meta_boxes($post_type, 'side', $post);
 
 ?>
 </div>
@@ -634,16 +793,19 @@ do_meta_boxes(null, 'advanced', $post);
 do_action( 'dbx_post_sidebar', $post );
 
 ?>
+
+<?php submit_button( __( 'Save' ), 'button', 'save' ); ?>
+
 </div><!-- /post-body -->
 <br class="clear" />
 </div><!-- /poststuff -->
 </form>
 </div>
 
-?>
 
 
-<form id="post" class="post-edit front-end-form" method="post" enctype="multipart/form-data">
+
+<!--<form id="post" class="post-edit front-end-form" method="post" enctype="multipart/form-data">
 
     <input type="hidden" name="post_id" value="<?php the_ID(); ?>" />
     <?php wp_nonce_field( 'update_post_'. get_the_ID(), 'update_post_nonce' ); ?>
@@ -663,7 +825,7 @@ do_action( 'dbx_post_sidebar', $post );
 
     <input type="submit" id="submit" value="Update" />
 
-</form>
+</form>-->
 
 
 
