@@ -162,3 +162,41 @@ margin: 0 10px;
 
     margin: 5px;
 }
+#TB_window{
+  width: 100% !important;
+  height: 100% !important;
+  margin-top: 0px !important;
+  margin-left: 0px !important;
+  top: 25% !important;
+  right: 10% !important;
+  bottom: 25% !important;
+  left: 10% !important;
+  width: 80% !important;
+  height: 50% !important;
+}
+#TB_iframeContent{
+    width: 100% !important;
+    height: 100% !important;
+}
+#TB_Image {
+  width: auto !important;
+  max-width: 100%;
+  height: auto !important;
+  max-height: 100%;
+  margin: auto !important;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 20px;
+  border: none !important;
+}
+
+@media (min-width: 992px) {
+  #TB_window {
+    top: 10% !important;
+    bottom: 10% !important;
+    height: 80% !important;
+  }
+}
