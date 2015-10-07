@@ -1,0 +1,20 @@
+.chart {
+  background: transparent;
+  margin: 25px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.chart rect {
+  stroke: white;
+  fill: #0073AA;
+}
+.chart text {
+  fill: white;
+  font-size: 22px;
+}
+.chart text.name {
+    font-size: 18px;
+  fill: #ffffff;
+}
+
