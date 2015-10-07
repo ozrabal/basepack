@@ -14,9 +14,16 @@ class Voting {
 	    $this->register_post_type();
 	}
 	$this->register_metaboxes();
-	add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_backend_scripts' ) );
-	remove_action( 'welcome_panel', 'wp_welcome_panel' );
-	add_action( 'welcome_panel', array( $this, 'setup_dashboard_panel' ) );
+	if(is_admin()){
+	    add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_backend_scripts' ) );
+	    remove_action( 'welcome_panel', 'wp_welcome_panel' );
+	    add_action( 'welcome_panel', array( $this, 'setup_dashboard_panel' ) );
+	}
+	//get_template_directory_uri() ."/js/voting-frontend.js
+	add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ) );
+	add_action( 'get_sidebar', array( $this, 'voting_buttons' ) );
+	add_action( 'wp_ajax_vote', array( $this, 'vote' ) );
+	add_action( 'wp_ajax_nopriv_vote', array( $this, 'vote' ) );
     }
 
     /**
@@ -93,6 +100,13 @@ class Voting {
     }
 
     /**
+     * enqueue scripts in frontend
+     */
+    public function enqueue_frontend_scripts() {
+	wp_enqueue_script( 'voting.frontend', BASEPACK_PLUGIN_URL . 'modules/voting/voting-frontend.js', array( 'jquery' ), true, true );
+    }
+
+    /**
      * Creates a dashboard panel showing the results of voting
      */
     public function setup_dashboard_panel() {
@@ -110,6 +124,32 @@ class Voting {
 	    echo $html;
 	}
     }
+    /**
+     * add voting buttons to sidebar in page theme
+     */
+    public function voting_buttons() {
+	$candidates = get_posts( array( 'post_type' => 'candidate' ) );
+	if( $candidates ) {
+	    $html = '<div id="voting" class="panel">';
+	    foreach ($candidates as $candidate){
+		$candidate->post_title;
+		$html .= '<button data-id="'.$candidate->ID.'" class="btn btn-default ">głosuj na:  '.$candidate->post_title.'</button>';
+	    }
+	    $html .= '</div>';
+	    echo $html;
+	}
+    }
 
-
+    /**
+     * ajax voting
+     */
+    public function vote(){
+	if(filter_input(INPUT_POST, 'action') && filter_input(INPUT_POST, 'id') && filter_input(INPUT_POST, 'score') && filter_input(INPUT_POST, 'action') == 'vote'){
+	    $total_score = get_post_meta(intval(filter_input(INPUT_POST, 'id')), 'score', TRUE);
+	    if( !empty($total_score) ){
+		$total_score = intval(filter_input(INPUT_POST, 'score')) + $total_score;
+		update_post_meta(intval(filter_input(INPUT_POST, 'id')), 'score', $total_score);
+	    }
+	}
+    }
 }
