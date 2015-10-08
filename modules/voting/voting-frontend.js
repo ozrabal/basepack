@@ -12,9 +12,9 @@
 		    score   : 125
 		},
 		success : function( response ) {
-		    $('#voting button').each(function(i,btn) {
-			$(this).prop('disabled', true);
-		    });
+//		    $('#voting button').each(function(i,btn) {
+//			$(this).prop('disabled', true);
+//		    });
 		    $('#voting').append('Dziękujemy');
 		}
 	    });

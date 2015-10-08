@@ -60,7 +60,7 @@ class Voting {
 		'has_archive'        => true,
 		'hierarchical'       => false,
 		'menu_position'      => null,
-		'supports'           => array( 'title', 'editor' )
+		'supports'           => array( 'title', 'editor','custom-fields' )
 	    );
 	    register_post_type( 'candidate', $candidate_args );
 	
@@ -76,6 +76,7 @@ class Voting {
 	    'title'     => __( 'Total score', 'pwp' ),
 	    'post_type' => array( 'candidate' ),
 	    'elements'  => array(
+		
 		array(
 		    'type'	=> 'text',
 		    'name'	=> 'score',
@@ -84,7 +85,8 @@ class Voting {
 		        'comment'   => __( 'The sum of collected points', 'pwp' ),
 		        'class'	    => 'large-text'
 		    )
-		)
+		),
+		
 	    )
 	);
 	new \Basepack\Core\Metabox( $candidate_meta );
@@ -126,6 +128,7 @@ class Voting {
 	    echo $html;
 	}
     }
+
     /**
      * add voting buttons to sidebar in page theme
      */
@@ -145,13 +148,45 @@ class Voting {
     /**
      * ajax voting
      */
-    public function vote(){
-	if(filter_input(INPUT_POST, 'action') && filter_input(INPUT_POST, 'id') && filter_input(INPUT_POST, 'score') && filter_input(INPUT_POST, 'action') == 'vote'){
-	    $total_score = get_post_meta(intval(filter_input(INPUT_POST, 'id')), 'score', TRUE);
-	    if( !empty($total_score) ){
-		$total_score = intval(filter_input(INPUT_POST, 'score')) + $total_score;
-		update_post_meta(intval(filter_input(INPUT_POST, 'id')), 'score', $total_score);
-	    }
+    public function vote() {
+	$action = filter_input( INPUT_POST, 'action' );
+	$id = intval( filter_input( INPUT_POST, 'id' ) );
+	$score = filter_input( INPUT_POST, 'score' );
+	if( $action && $id && $score && $action == 'vote' ) {
+	    $total_score = get_post_meta( $id, 'score', TRUE );
+	    $total_score = $score + $total_score;
+	    update_post_meta( $id, 'score', $total_score );
+	    do_action( 'voting_post_update_score', $id, $total_score );
 	}
     }
 }
+
+/* hacks
+if(function_exists('pll_default_language') && is_admin()){
+    add_filter('voting_get_candidates_dashboard', 'pp');
+    function pp($args){
+	return array( 'post_type' => 'candidate', 'lang'=> pll_default_language() );
+    }
+}
+add_action('voting_post_update_score', function($candidate_id, $total_score ) {
+    $languages = pll_languages_list();
+    foreach ( $languages as $l){
+	$post_lang = pll_get_post($candidate_id, $l);
+	if($post_lang != $candidate_id){
+	    update_post_meta($post_lang, 'score', $total_score);
+	}
+    }
+}, 1, 2 );
+
+add_action('save_post_candidate', function( $post_id, $post ){
+    if(filter_input(INPUT_POST, 'score')){
+        $languages = pll_languages_list();
+	foreach ( $languages as $l){
+	    $post_lang = pll_get_post($post_id, $l);
+	    //if($post_lang != $post_id){
+		update_post_meta($post_lang, 'score', filter_input(INPUT_POST, 'score'));
+	    //}
+	}
+    }
+}, 10, 2 );
+ */
