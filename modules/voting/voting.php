@@ -15,7 +15,7 @@ class Voting {
 	}
 	$this->register_metaboxes();
 	if(is_admin()){
-	    add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_backend_scripts' ) );
+	    //add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_backend_scripts' ) );
 	    remove_action( 'welcome_panel', 'wp_welcome_panel' );
 	    add_action( 'welcome_panel', array( $this, 'setup_dashboard_panel' ) );
 	}
@@ -110,8 +110,10 @@ class Voting {
      * Creates a dashboard panel showing the results of voting
      */
     public function setup_dashboard_panel() {
-
-	$candidates = get_posts( array( 'post_type' => 'candidate' ) );
+	$this->enqueue_backend_scripts();
+	$args = array( 'post_type' => 'candidate' );
+	$args = apply_filters( 'voting_get_candidates_dashboard', $args);
+	$candidates = get_posts( $args );
 	if( $candidates ) {
 	    $html = '<div class="welcome-panel-content"><h3>' . __( 'Voting results', 'pwp' ) . '</h3>';
 	    foreach( $candidates as $candidate ) {
