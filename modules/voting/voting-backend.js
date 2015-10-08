@@ -4,6 +4,7 @@
       width = 800,
       bar_height = 50,
       height = bar_height * chart_data.names.length;
+    
 var left_width = 10;
   /* step 1 */
   chart = d3.select($("#voting-results")[0])
