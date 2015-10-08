@@ -1,4 +1,4 @@
-jQuery(function($) {
+!function ($) {
   var
       chart,
       width = 800,
@@ -51,5 +51,5 @@ chart.selectAll("text.name")
   .text(String);
 
 
-  })(jQuery);
+}(window.jQuery);
 
