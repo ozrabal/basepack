@@ -21,7 +21,7 @@ class Voting {
 	}
 	//get_template_directory_uri() ."/js/voting-frontend.js
 	add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ) );
-	add_action( 'get_sidebar', array( $this, 'voting_buttons' ) );
+	add_action( 'enqueue_voting', array( $this, 'voting_buttons' ) );
 	add_action( 'wp_ajax_vote', array( $this, 'vote' ) );
 	add_action( 'wp_ajax_nopriv_vote', array( $this, 'vote' ) );
     }
