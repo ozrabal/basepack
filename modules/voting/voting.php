@@ -24,6 +24,8 @@ class Voting {
 	add_action( 'enqueue_voting', array( $this, 'voting_buttons' ) );
 	add_action( 'wp_ajax_vote', array( $this, 'vote' ) );
 	add_action( 'wp_ajax_nopriv_vote', array( $this, 'vote' ) );
+	add_action( 'wp_ajax_get_voting', array( $this, 'get_voting' ) );
+	add_action( 'wp_ajax_nopriv_get_voting', array( $this, 'get_voting' ) );
     }
 
     /**
@@ -146,6 +148,25 @@ class Voting {
     }
 
     /**
+     * get buttons for ajax
+     */
+    public function get_voting(){
+	$action = filter_input( INPUT_POST, 'action' );
+	if( $action == 'get_voting' ) {
+	    $candidates = get_posts( array( 'post_type' => 'candidate' ) );
+	    $i = 0;
+	    foreach ( $candidates as $candidate ){
+		$voting['buttons'][$i]['name'] = $candidate->post_title;
+		$voting['buttons'][$i]['id'] = $candidate->ID;
+		$voting['buttons'][$i]['score'] = get_post_meta( $candidate->ID, 'score', TRUE );
+		$i++;
+	    }
+	    echo wp_json_encode( $voting );
+	    die();
+	}
+    }
+
+    /**
      * ajax voting
      */
     public function vote() {
@@ -156,8 +177,11 @@ class Voting {
 	    $total_score = get_post_meta( $id, 'score', TRUE );
 	    $total_score = $score + $total_score;
 	    update_post_meta( $id, 'score', $total_score );
+	    echo 'ok';
 	    do_action( 'voting_post_update_score', $id, $total_score );
+	    
 	}
+	die();
     }
 }
 
