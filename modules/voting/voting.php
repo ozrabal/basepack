@@ -123,7 +123,7 @@ class Voting {
 	    foreach( $candidates as $candidate ) {
 		$data[] = array( $candidate->post_title, intval( get_post_meta( $candidate->ID, 'score', true ) ) );
 	    }
-	    wp_localize_script( 'd3.voting.admin', 'data',$data );
+	    wp_localize_script( 'd3.voting.admin', 'data', $data );
 	    $html .= '<div id="chart"></div> </div>';
 	    echo $html;
 	}
@@ -137,8 +137,10 @@ class Voting {
 	if( $candidates ) {
 	    $html = '<div id="voting" class="panel">';
 	    foreach ($candidates as $candidate){
-		$candidate->post_title;
-		$html .= '<button data-id="'.$candidate->ID.'" class="btn btn-default ">głosuj na:  '.$candidate->post_title.'</button>';
+		//$candidate->post_title;
+		$html .= '<div class="candidate"><button data-id="' . $candidate->ID . '" class="btn btn-default ">głosuj na:  ' . $candidate->post_title . '</button>';
+		$html .= '<div class="description>' . apply_filters( 'the_content', $candidate->post_content ) . '</div>'
+			. '</div>';
 	    }
 	    $html .= '</div>';
 	    echo $html;
