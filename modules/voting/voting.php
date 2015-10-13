@@ -121,12 +121,10 @@ class Voting {
 	if( $candidates ) {
 	    $html = '<div class="welcome-panel-content"><h3>' . __( 'Voting results', 'pwp' ) . '</h3>';
 	    foreach( $candidates as $candidate ) {
-		$names[] = $candidate->post_title;
-		$scores[] = intval( get_post_meta( $candidate->ID, 'score', true ) );
+		$data[] = array( $candidate->post_title, intval( get_post_meta( $candidate->ID, 'score', true ) ) );
 	    }
-	    $chart_data =  array( 'names' => $names, 'scores' => $scores );
-	    wp_localize_script( 'd3.voting.admin', 'chart_data',$chart_data );
-	    $html .= '<div id="voting-results"></div></div>';
+	    wp_localize_script( 'd3.voting.admin', 'data',$data );
+	    $html .= '<div id="chart"></div> </div>';
 	    echo $html;
 	}
     }
