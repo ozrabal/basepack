@@ -2,7 +2,6 @@
 
 namespace Modules\Voting;
 
-
 class Voting {
 
     /**
@@ -138,9 +137,10 @@ class Voting {
 	    $html = '<div id="voting" class="panel">';
 	    foreach ($candidates as $candidate){
 		//$candidate->post_title;
-		$html .= '<div class="candidate"><button data-id="' . $candidate->ID . '" class="btn btn-default ">głosuj na:  ' . $candidate->post_title . '</button>';
-		$html .= '<div class="description>' . apply_filters( 'the_content', $candidate->post_content ) . '</div>'
-			. '</div>';
+		$html .= '<div class="candidate">';
+                $html .= '<button data-id="' . $candidate->ID . '" class="btn btn-default ">głosuj na:  ' . $candidate->post_title . '</button>';
+		$html .= '<div class="description>' . apply_filters( 'the_content', $candidate->post_content ) . '</div>';
+		$html .=  '</div>';
 	    }
 	    $html .= '</div>';
 	    echo $html;
