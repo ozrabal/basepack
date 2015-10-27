@@ -340,7 +340,8 @@ private function allow_template( $template_name ){
             $element->set_value( $_SESSION['p_'.$post->ID][$element->name] );
         } else {
             $element->set_value( get_post_meta( $post->ID, $element->name, true ) );
-        }  
+        }
+	$element->set_value( get_post_meta( $post->ID, $element->name, true ) );
         return '<tr ><td>' . $element->render() . '</tr></td>';
     }
 
