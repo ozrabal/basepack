@@ -14,8 +14,8 @@
     height: 85px;
 }
 .map-box {
-  height: 300px;
-  border: 1px solid #000;
+    height: 300px;
+    border: 1px solid #000;
 }
 .box {
     display: block;
