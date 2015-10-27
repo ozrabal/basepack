@@ -1,0 +1,31 @@
+#chart {
+  height: 250px;
+  width: auto;
+  margin: 25px 25px 25px 0;
+}
+svg {
+  shape-rendering: crispEdges;
+}
+.bar {
+  fill: #0073AA;
+}
+.value {
+  font-size: 18px;
+  font-weight: 600;
+  fill: #ffffff;
+}
+.label {
+  font-size: 14px;
+  fill: #333;
+}
+.axis {
+  font-size: 10px;
+}
+.axis path {
+  fill: none;
+}
+.axis .tick line {
+  stroke-width: 1;
+  stroke: rgba(0, 0, 0, 0.1);
+}
+
