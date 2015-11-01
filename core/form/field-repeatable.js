@@ -1,3 +1,4 @@
+
 jQuery(function(jQuery) {
 
  ile = jQuery('.repeatable-item').length;
@@ -58,7 +59,7 @@ var id=1;
 	b = '.open-media-button';
  d = jQuery(b).next();
 
- jQuery(ds.media.init);
+ //jQuery(ds.media.init);
 
 
 
@@ -167,18 +168,50 @@ function renumber_helper(index,element) {
      textarea.id = id.replace(/(\d+)/,index);
   }
 
-  buttons = jQuery('button',element);
+  //buttons = jQuery('button, .button',element);
+    var buttons = jQuery('.insert-media',element);
   for (j = 0; j < buttons.length; j++) {
 
      button = buttons[j];
-     //console.log(jQuery(button).data('editor'));
-     editor = jQuery(button).data('editor');
+     //console.log(button);
+     var editor = jQuery(buttons[j]).attr('data-editor');
+     
+     console.log(editor);
+     
 	     //textarea.name = name.replace(/(\d+)/,index);
-	     //if(jQuery(button).data('editor')){
-	    jQuery(button).data('editor',editor.replace(/(\d+)/,index));
+	     //if(editor){
+	    jQuery(button).attr('data-editor',editor.replace(/(\d+)/,index));
 	     //}
-  }
-
+          
+             
+  //tinymce.init({ selector: '#' + editor });
+    }
+  //tinymce.remove('textarea'); 
+ var edt = jQuery('.wp-editor-wrap');
+ console.log(edt);
+   for (j = 0; j < edt.length; j++) {
+       
+       
+      
+       
+tex = edt[j];
+     id = tex.id;
+     tex.id = id.replace(/(\d+)/,index);
+     
+       tinymce.init(tex.id);
+        tinymce.execCommand('mceAddEditor', false, tex.id);
+     console.log(tex.id);
+ //tinyMCE.execCommand('mceRemoveControl',false,tex.id);
+ 
+//jQuery(edt[j]).each('div', function(index){
+//         
+//         console.log(this);
+//         //this.id = id.replace(/(\d+)/,index);
+//         
+//     });
+     
+       }
+     
   selects = jQuery('select',element);
   for (j = 0; j < selects.length; j++) {
     select = selects[j];

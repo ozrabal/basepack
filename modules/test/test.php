@@ -61,57 +61,7 @@ class Test {
 			'comment'   => 'Comment',
 			'class'	    => '',
 			'repeater'  => array(
-			    array(
-				'type'	=> 'text',
-				'name'	=> 'repeatable_text',
-				'params'=> array(
-				    'label'	=> 'Repeatable Text Label',
-				    'comment'   => 'Comment',
-				    'class'	=> 'large-text'
-				)
-			    ),
                             array(
-				'type'	=> 'color',
-				'name'	=> 'repeatable_color',
-				'params'=> array(
-				    'label'	=> 'Repeatable Color Label',
-				    'comment'   => 'Comment',
-				    'default_color' => '#ffffff',
-				    'palettes' => array('#4E567D', '#006EAB', '#8781BD', '#EB008B', '#00B38A', '#BFCCD3')
-				)
-			    )
-			)
-		    )
-		),
-		array(
-		    'type'	=> 'color',
-		    'name'	=> 'color',
-		    'params'	=> array(
-			'label'	    => 'Color Label',
-			'comment'   => 'Comment',
-			'class'	    => 'color-field',
-			'default_color' => '#ffffff'
-		    ),
-		),
-		array(
-		    'type'	=> 'text',
-		    'name'	=> 'text',
-		    'params'	=> array(
-			'label'	    => 'Text Label',
-			'comment'   => 'Comment',
-			'class'	    => 'large-text'
-		    ),
-		),
-		array(
-		    'type'	=> 'textarea',
-		    'name'	=> 'textarea',
-		    'params'	=> array(
-			'label'	    => 'Textarea Label',
-			'comment'   => 'Comment',
-			'class'	    => 'large-text'
-		    ),
-		),
-		array(
 		    'type'	=> 'wysiwyg',
 		    'name'	=> 'wysiwyg',
 		    'params'	=> array(
@@ -123,56 +73,118 @@ class Test {
 			)
 		    ),
 		),
-		array(
-		    'type'	=> 'checkbox',
-		    'name'	=> 'checkbox',
-		    'params'	=> array(
-			'label'	    => 'Checkbox Label',
-			'comment'   => 'Comment',
-			'class'	    => ''
-		    ),
-		),
-		array(
-		    'type'	=> 'image',
-		    'name'	=> 'image',
-		    'params'	=> array(
-			'label'	    => 'Image Label',
-			'comment'   => 'Comment',
-			'class'	    => '',
-                        'data'      => array(
-                            'title'     => 'Image title',
-                            'select'    => 'Select image',
-                            'mime'      => 'image'
-                        )
-		    ),
-		),
-		array(
-		    'type'	=> 'attachment',
-		    'name'	=> 'attachment',
-		    'params'	=> array(
-			'label'	    => 'Attachment Label',
-			'comment'   => 'Comment',
-			'class'	    => '',
-                        'data'      => array(
-                            'title'     => 'File title',
-                            'select'    => 'Select file',
-                            'mime'      => 'multipart'
-                        )
-		    ),
-		),
-		array(
-		    'type'	=> 'select',
-		    'name'	=> 'select',
-		    'params'	=> array(
-			'label'	=> 'Select Label',
-			'comment'   => 'Comment',
-			'class'	    => '',
-			'options'   => array(
-			    'key1'  => 'value1',
-			    'key2'  => 'value2'
+//			    array(
+//				'type'	=> 'text',
+//				'name'	=> 'repeatable_text',
+//				'params'=> array(
+//				    'label'	=> 'Repeatable Text Label',
+//				    'comment'   => 'Comment',
+//				    'class'	=> 'large-text'
+//				)
+//			    ),
+//                            array(
+//				'type'	=> 'color',
+//				'name'	=> 'repeatable_color',
+//				'params'=> array(
+//				    'label'	=> 'Repeatable Color Label',
+//				    'comment'   => 'Comment',
+//				    'default_color' => '#ffffff',
+//				    'palettes' => array('#4E567D', '#006EAB', '#8781BD', '#EB008B', '#00B38A', '#BFCCD3')
+//				)
+//			    )
 			)
-		    ),
+		    )
 		),
+//		array(
+//		    'type'	=> 'color',
+//		    'name'	=> 'color',
+//		    'params'	=> array(
+//			'label'	    => 'Color Label',
+//			'comment'   => 'Comment',
+//			'class'	    => 'color-field',
+//			'default_color' => '#ffffff'
+//		    ),
+//		),
+//		array(
+//		    'type'	=> 'text',
+//		    'name'	=> 'text',
+//		    'params'	=> array(
+//			'label'	    => 'Text Label',
+//			'comment'   => 'Comment',
+//			'class'	    => 'large-text'
+//		    ),
+//		),
+//		array(
+//		    'type'	=> 'textarea',
+//		    'name'	=> 'textarea',
+//		    'params'	=> array(
+//			'label'	    => 'Textarea Label',
+//			'comment'   => 'Comment',
+//			'class'	    => 'large-text'
+//		    ),
+//		),
+//		array(
+//		    'type'	=> 'wysiwyg',
+//		    'name'	=> 'wysiwyg',
+//		    'params'	=> array(
+//			'label'	    => 'Wysiwyg Label',
+//			'comment'   => 'Comment',
+//			'class'	    => '',
+//			'options'   => array(
+//			    'tinymce'	=> true
+//			)
+//		    ),
+//		),
+//		array(
+//		    'type'	=> 'checkbox',
+//		    'name'	=> 'checkbox',
+//		    'params'	=> array(
+//			'label'	    => 'Checkbox Label',
+//			'comment'   => 'Comment',
+//			'class'	    => ''
+//		    ),
+//		),
+//		array(
+//		    'type'	=> 'image',
+//		    'name'	=> 'image',
+//		    'params'	=> array(
+//			'label'	    => 'Image Label',
+//			'comment'   => 'Comment',
+//			'class'	    => '',
+//                        'data'      => array(
+//                            'title'     => 'Image title',
+//                            'select'    => 'Select image',
+//                            'mime'      => 'image'
+//                        )
+//		    ),
+//		),
+//		array(
+//		    'type'	=> 'attachment',
+//		    'name'	=> 'attachment',
+//		    'params'	=> array(
+//			'label'	    => 'Attachment Label',
+//			'comment'   => 'Comment',
+//			'class'	    => '',
+//                        'data'      => array(
+//                            'title'     => 'File title',
+//                            'select'    => 'Select file',
+//                            'mime'      => 'multipart'
+//                        )
+//		    ),
+//		),
+//		array(
+//		    'type'	=> 'select',
+//		    'name'	=> 'select',
+//		    'params'	=> array(
+//			'label'	=> 'Select Label',
+//			'comment'   => 'Comment',
+//			'class'	    => '',
+//			'options'   => array(
+//			    'key1'  => 'value1',
+//			    'key2'  => 'value2'
+//			)
+//		    ),
+//		),
 		
 	    )
 	);
