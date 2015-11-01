@@ -7,6 +7,15 @@ jQuery(function(jQuery) {
 function set_default_inputs(field){
     jQuery(field).find('input[type=text], input[type=hidden], text, textarea, select, checkbox').val(''); // Reset the values
 
+
+//console.info(t);
+//
+//
+//
+//tinyMCE.execCommand('mceRemoveEditor',false,t[0].id);
+//tinymce.EditorManager.execCommand('mceRemoveEditor', false, t[0].id);
+//console.log(tinyMCE);
+//tinymce.remove(t[0].id);
     //def =  field.find('img').attr('data-src-default');
     jQuery(field).find('img').attr('src',function(){
 	return jQuery(this).attr('data-src-default');
@@ -31,14 +40,20 @@ jQuery('.repeatable-add').click(function(e) {
 
 var id=1;
 
+//field.find('.wp-editor-wrap').remove();
+
+
 
 //	field.find('div').attr('id', function(index, id) {
 //		return name.replace(/(\d+)/, function(fullMatch, n) {
 //			return Number(n) + 1;
 //		});
 //	})
-        
-        
+       t = jQuery(field).find('textarea');
+       console.error(t[0].id);
+      
+       
+     
         
         //alert(fieldLocation.length)
         
@@ -47,7 +62,6 @@ var id=1;
         
 	field.insertAfter(fieldLocation);
         //renumber(ui.item).
-
 
 
 
@@ -154,8 +168,11 @@ function renumber_helper(index,element) {
     input.id = id.replace(/(\d+)/,index);
   }
 
+
+
   textareas = jQuery('textarea',element);
   for (j = 0; j < textareas.length; j++) {
+      
      textarea = textareas[j];
      name = textarea.name;
      textarea.name = name.replace(/(\d+)/,index);
@@ -165,53 +182,76 @@ function renumber_helper(index,element) {
   for (j = 0; j < textareas.length; j++) {
      textarea = textareas[j];
      id = textarea.id;
+     
      textarea.id = id.replace(/(\d+)/,index);
+     
   }
 
-  //buttons = jQuery('button, .button',element);
-    var buttons = jQuery('.insert-media',element);
-  for (j = 0; j < buttons.length; j++) {
 
-     button = buttons[j];
-     //console.log(button);
-     var editor = jQuery(buttons[j]).attr('data-editor');
-     
-     console.log(editor);
-     
-	     //textarea.name = name.replace(/(\d+)/,index);
-	     //if(editor){
-	    jQuery(button).attr('data-editor',editor.replace(/(\d+)/,index));
-	     //}
-          
-             
-  //tinymce.init({ selector: '#' + editor });
-    }
+
+
+
+  //buttons = jQuery('button, .button',element);
+//    var buttons = jQuery('.insert-media',element);
+//  for (j = 0; j < buttons.length; j++) {
+//
+//     button = buttons[j];
+//     //console.log(button);
+//     var editor = jQuery(buttons[j]).attr('data-editor');
+//     
+//     console.log(editor);
+//     
+//	     //textarea.name = name.replace(/(\d+)/,index);
+//	     //if(editor){
+//	    jQuery(button).attr('data-editor',editor.replace(/(\d+)/,index));
+//	     //}
+//          
+//             
+//  //tinymce.init({ selector: '#' + editor });
+//    }
   //tinymce.remove('textarea'); 
- var edt = jQuery('.wp-editor-wrap');
- console.log(edt);
-   for (j = 0; j < edt.length; j++) {
-       
-       
-      
-       
-tex = edt[j];
-     id = tex.id;
-     tex.id = id.replace(/(\d+)/,index);
-     
-       tinymce.init(tex.id);
-        tinymce.execCommand('mceAddEditor', false, tex.id);
-     console.log(tex.id);
- //tinyMCE.execCommand('mceRemoveControl',false,tex.id);
- 
-//jQuery(edt[j]).each('div', function(index){
-//         
-//         console.log(this);
-//         //this.id = id.replace(/(\d+)/,index);
-//         
-//     });
-     
-       }
-     
+// var edt = jQuery('.wp-editor-wrap');
+// console.log(edt);
+//   for (j = 0; j < edt.length; j++) {
+//       
+//       
+//      
+//       
+//tex = edt[j];
+//     id = tex.id;
+//     tex.id = id.replace(/(\d+)/,index);
+//     
+//       tinymce.init(tex.id);
+//        tinymce.execCommand('mceAddEditor', false, tex.id);
+//     console.log(tex.id);
+// //tinyMCE.execCommand('mceRemoveControl',false,tex.id);
+// 
+////jQuery(edt[j]).each('div', function(index){
+////         
+////         console.log(this);
+////         //this.id = id.replace(/(\d+)/,index);
+////         
+////     });
+//     
+//       }
+//     
+
+var edt = jQuery('.wp-editor-wrap textarea');
+
+console.log(edt);
+
+
+
+
+for (j = 0; j < edt.length; j++) {
+    //tinymce.remove(tinymce.editors[edt[j].id])
+    console.log(edt[0].id);
+    //tinyMCE.execCommand("mceRemoveControl", false,edt[j].id);
+    tinyMCE.execCommand("mceAddControl", false,edt[j].id);
+    
+    
+}
+
   selects = jQuery('select',element);
   for (j = 0; j < selects.length; j++) {
     select = selects[j];
