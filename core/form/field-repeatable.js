@@ -4,6 +4,20 @@ jQuery(function(jQuery) {
  ile = jQuery('.repeatable-item').length;
 
 
+var origin = jQuery('.repeatable-item:first-child');
+var origin_ed_id = jQuery(origin).find('.wp-editor-area').attr('id');
+console.log(tinymce);
+
+tinyMCE.execCommand('mceRemoveEditor',false,'repeatable_0__wysiwyg_e');
+
+
+function origin_set_id(){
+    
+}
+
+
+
+
 function set_default_inputs(field){
     jQuery(field).find('input[type=text], input[type=hidden], text, textarea, select, checkbox').val(''); // Reset the values
 
@@ -32,6 +46,31 @@ jQuery('.repeatable-add').click(function(e) {
 
 
     jQuery('.repeatable-remove',f).removeClass('disable');
+
+jQuery(f).find('.repeatable-element').each(function(index,element) {
+    
+
+    renumber_helper(index,element); 
+    showNameAsValue(this)
+    
+  });
+console.log(f);
+
+t = jQuery(f).find('textarea').attr('id');
+
+
+console.log(tinyMCE.editors[t].remove());
+
+
+//tinyMCE.editors;
+//tinymce.remove(t);
+
+
+
+
+
+
+
 
     field = f.clone();
 	//field = jQuery('.repeatable').find('.repeatable-item:last-child').clone();
@@ -68,6 +107,13 @@ var id=1;
  ile = jQuery(this).find('.repeatable-item').length;
 //console.log(jQuery(this));
     renumber(this);
+    last = jQuery('.repeatable-item:last-child textarea');
+    console.log(last.attr('id'));
+//tinyMCE.execCommand('mceAddEditor',false,'repeatable_1__wysiwyg_e');
+
+tinyMCE.execCommand('mceAddEditor',false,last.attr('id'));
+
+tinyMCE.execCommand('mceAddEditor',false,t);
 
 //tinyMCE.execCommand('mceAddEditor',false,'repeatable_1__wysiwyg_e');
 

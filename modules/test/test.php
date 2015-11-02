@@ -69,7 +69,7 @@ class Test {
 			'comment'   => 'Comment',
 			'class'	    => '',
 			'options'   => array(
-			    'tinymce'	=> false
+			    'tinymce'	=> true
 			)
 		    ),
 		),
