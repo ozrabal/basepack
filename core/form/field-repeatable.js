@@ -8,7 +8,7 @@ var origin = jQuery('.repeatable-item:first-child');
 var origin_ed_id = jQuery(origin).find('.wp-editor-area').attr('id');
 console.log(tinymce);
 
-tinyMCE.execCommand('mceRemoveEditor',false,'repeatable_0__wysiwyg_e');
+//tinyMCE.execCommand('mceRemoveEditor',false,'repeatable_0__wysiwyg_e');
 
 
 function origin_set_id(){
@@ -114,6 +114,15 @@ var id=1;
 tinyMCE.execCommand('mceAddEditor',false,last.attr('id'));
 
 tinyMCE.execCommand('mceAddEditor',false,t);
+
+
+//field.find('.wp-editor-wrap').each(function(index, el) {
+//        var ed_id = $(this).find('textarea').attr('id');
+//
+//        tinymce.init(tinyMCEPreInit.mceInit[ed_id]);
+//        tinymce.execCommand('mceAddEditor', false, ed_id); 
+//        quicktags({id : ed_id});
+//    });
 
 //tinyMCE.execCommand('mceAddEditor',false,'repeatable_1__wysiwyg_e');
 
