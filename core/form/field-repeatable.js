@@ -2,7 +2,7 @@
 jQuery(function(jQuery) {
 
  ile = jQuery('.repeatable-item').length;
-	   
+
 
 function set_default_inputs(field){
     jQuery(field).find('input[type=text], input[type=hidden], text, textarea, select, checkbox').val(''); // Reset the values
@@ -26,7 +26,8 @@ function set_default_inputs(field){
 
 jQuery('.repeatable-add').click(function(e) {
     e.preventDefault();
-
+//tinyMCE.execCommand('mceRemoveEditor',false,'repeatable_0__wysiwyg_e');
+     
     f = jQuery(this).parent().find('.repeatable-item:last-child');
 
 
@@ -50,10 +51,9 @@ var id=1;
 //		});
 //	})
        t = jQuery(field).find('textarea');
-       console.error(t[0].id);
+       console.error(t);
       
        
-     
         
         //alert(fieldLocation.length)
         
@@ -68,6 +68,8 @@ var id=1;
  ile = jQuery(this).find('.repeatable-item').length;
 //console.log(jQuery(this));
     renumber(this);
+
+//tinyMCE.execCommand('mceAddEditor',false,'repeatable_1__wysiwyg_e');
 
 
 	b = '.open-media-button';
@@ -191,24 +193,24 @@ function renumber_helper(index,element) {
 
 
 
-  //buttons = jQuery('button, .button',element);
-//    var buttons = jQuery('.insert-media',element);
-//  for (j = 0; j < buttons.length; j++) {
-//
-//     button = buttons[j];
-//     //console.log(button);
-//     var editor = jQuery(buttons[j]).attr('data-editor');
-//     
-//     console.log(editor);
-//     
-//	     //textarea.name = name.replace(/(\d+)/,index);
-//	     //if(editor){
-//	    jQuery(button).attr('data-editor',editor.replace(/(\d+)/,index));
-//	     //}
-//          
-//             
-//  //tinymce.init({ selector: '#' + editor });
-//    }
+  buttons = jQuery('button, .button',element);
+    var buttons = jQuery('.insert-media',element);
+  for (j = 0; j < buttons.length; j++) {
+
+     button = buttons[j];
+     //console.log(button);
+     var editor = jQuery(buttons[j]).attr('data-editor');
+     
+     console.log(editor);
+     
+	     //textarea.name = name.replace(/(\d+)/,index);
+	     //if(editor){
+	    jQuery(button).attr('data-editor',editor.replace(/(\d+)/,index));
+	     //}
+          
+             
+  //tinymce.init({ selector: '#' + editor });
+    }
   //tinymce.remove('textarea'); 
 // var edt = jQuery('.wp-editor-wrap');
 // console.log(edt);
@@ -247,7 +249,7 @@ for (j = 0; j < edt.length; j++) {
     //tinymce.remove(tinymce.editors[edt[j].id])
     console.log(edt[0].id);
     //tinyMCE.execCommand("mceRemoveControl", false,edt[j].id);
-    tinyMCE.execCommand("mceAddControl", false,edt[j].id);
+   // tinyMCE.execCommand("mceAddControl", false,edt[j].id);
     
     
 }
