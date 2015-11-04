@@ -132,6 +132,6 @@ $lr = 'fl';
 	}
 
 	$output .= '';
-	return $output;
+	return '<section class="bg">'.$output.'</section>';
     }
 }
